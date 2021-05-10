@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,12 @@ namespace Tussentijds_Project
         public MainWindow()
         {
             InitializeComponent();
+            CreateDB();
 
+
+        }
+        public void CreateDB()
+        {
             using (var ctx = new OrderManagerContext())
             {
                 ctx.Roles.Add(new Role() { Name = "Administrator" });
@@ -37,13 +43,10 @@ namespace Tussentijds_Project
                     LastName = "Zubrzycki",
                     Username = "nzubrzycki",
                     Password = "nz17983",
-                    
+                    RoleId = 1
                 });
+                ctx.SaveChanges();
             }
-        }
-        static void CreateDB()
-        {
-
         }
         public class User
         {
@@ -56,12 +59,18 @@ namespace Tussentijds_Project
             [MaxLength(50)]
             public string Username { get; set; }
             [MaxLength(50)]
-            public string Password { get; set; }
+            private string password;
+            public string Password
+            {
+                get { return password; }
+                set { password = EncryptPassword(value); }
+            }
+            public int RoleId { get; set; }
             public Role Role { get; set; }
 
-            public string EncryptPassword()
+            public string EncryptPassword(string password)
             {
-                char[] charPassword = Password.ToCharArray();
+                char[] charPassword = password.ToCharArray();
 
                 for (int i = 0; i < charPassword.Length; i++)
                 {
@@ -90,7 +99,86 @@ namespace Tussentijds_Project
         {
             [Key]
             public int RoleId { get; set; }
+            [MaxLength(50)]
             public string Name { get; set; }
+        }
+        public class CustomerOrder
+        {
+            [Key]
+            public int OrderId { get; set; }
+            public int CustomerId { get; set; }
+            public Customer Customer { get; set; }
+            public int UserId { get; set; }
+            public User User { get; set; }
+            public DateTime OrderDate { get; set; }
+           
+        }
+        public class SupplyOrder
+        {
+            [Key]
+            public int OrderId { get; set; }
+            public int SupplierId { get; set; }
+            public Supplier Supplier { get; set; }
+            public int UserId { get; set; }
+            public User User { get; set; }
+            public DateTime OrderDate { get; set; }
+            
+        }
+        public class CustomerOrderDetail
+        {
+            [Key]
+            [Column(Order = 1)]
+            public int OrderId { get; set; }
+            public CustomerOrder CustomerOrder { get; set; }
+            [Key]
+            [Column(Order = 2)]
+            public int ProductId { get; set; }
+            public double UnitPrice { get; set; }
+            public int Quantity { get; set; }
+
+        }
+        public class SupplyOrderDetail
+        {
+            [Key]
+            [Column(Order = 1)]
+            public int OrderId { get; set; }
+            public SupplyOrder SupplyOrder { get; set; }
+            [Key]
+            [Column(Order = 2)]
+            public int ProductId { get; set; }
+            public double UnitPrice { get; set; }
+            public int Quantity { get; set; }
+
+        }
+        public class Product
+        {
+            [Key]
+            public int ProductId { get; set; }
+            [MaxLength(100)]
+            public string Name { get; set; }
+            [MaxLength(50)]
+            public string Description { get; set; }
+            public int Stock { get; set; }
+            public double UnitPrice { get; set; }
+            public int SupplierId { get; set; }
+            public Supplier Supplier { get; set; }
+            
+        }
+        public class Customer
+        {
+            [Key]
+            public int CustomerId { get; set; }
+            [MaxLength(50)]
+            public string Name { get; set; }
+            [MaxLength(50)]
+            public string Address { get; set; }
+        }
+        public class Supplier
+        {
+            [Key]
+            public int SupplierId { get; set; }
+            public string Name { get; set; }
+            public string Address { get; set; }
         }
         public class OrderManagerContext : DbContext
         {
@@ -101,6 +189,9 @@ namespace Tussentijds_Project
 
             public DbSet<User> Users { get; set; }
             public DbSet<Role> Roles { get; set; }
+            public DbSet<CustomerOrder> CustomerOrders { get; set; }
+            public DbSet<Product> Products { get; set; }
+            public DbSet<Customer> Customers { get; set; }
         }
     }
 }
