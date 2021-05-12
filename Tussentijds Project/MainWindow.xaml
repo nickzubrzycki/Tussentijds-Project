@@ -6,7 +6,17 @@
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Background="AliceBlue">
+        <StackPanel Margin="100" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="70">Username:</Label>
+                <TextBox x:Name="txtUsername" Width="200"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Label Width="70">Password:</Label>
+                <TextBox x:Name="txtPassword" Width="200"></TextBox>
+            </StackPanel>            
+            <Button Width="100" Margin="20" HorizontalAlignment="Center" Click="Button_Click">Log in</Button>
+        </StackPanel>
     </Grid>
 </Window>
