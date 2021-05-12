@@ -30,7 +30,11 @@ namespace Tussentijds_Project
             Password = Encryption(password);
             Role = role;
         }
-        public string Encryption(string password)
+        public User()
+        {
+
+        }
+        public static string Encryption(string password)
         {
             char[] charPassword = password.ToCharArray();
 
@@ -49,7 +53,7 @@ namespace Tussentijds_Project
             string encryptedPassword = new string(charPassword);
             return encryptedPassword;
         }
-        public char NextChar(char c)
+        public static char NextChar(char c)
         {
             int ascii = c;
             int nextascii = ascii + 1;
