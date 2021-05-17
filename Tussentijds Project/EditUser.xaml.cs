@@ -32,15 +32,16 @@ namespace Tussentijds_Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            User selected = cbUsers.SelectedItem as User;
+            User selectedUser = cbUsers.SelectedItem as User;
+            Role selectedRole = cbRoles.SelectedItem as Role;
 
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Users.FirstOrDefault(u => u.FirstName == selected.FirstName).FirstName = txtVoornaam.Text;
-                ctx.Users.FirstOrDefault(u => u.LastName == selected.LastName).LastName = txtAchternaam.Text;
-                ctx.Users.FirstOrDefault(u => u.Username == selected.Username).Username = txtUsername.Text;
-                ctx.Users.FirstOrDefault(u => u.Password == selected.Password).Password = txtPassword.Text;
-                ctx.Users.FirstOrDefault(u => u.Role == selected.Role).Role = (Role)cbRoles.SelectedItem;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).FirstName = txtVoornaam.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).LastName = txtAchternaam.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Username = txtUsername.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Password = txtPassword.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Role = ctx.Roles.FirstOrDefault(r => r.RoleId == selectedRole.RoleId);
                 ctx.SaveChanges();
             }          
             Close();
@@ -51,6 +52,8 @@ namespace Tussentijds_Project
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
+            DataUsers users = new DataUsers();
+            users.Show();
         }
 
         private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)

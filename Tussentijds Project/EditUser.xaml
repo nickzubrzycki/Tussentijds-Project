@@ -50,7 +50,6 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>           
-        </DockPanel>
-        
+        </DockPanel>        
     </Grid>
 </Window>

@@ -87,7 +87,8 @@ namespace Tussentijds_Project
         public int ProductId { get; set; }
         [MaxLength(100)]
         public string Name { get; set; }     
-        public double UnitPrice { get; set; }        
+        public double UnitPrice { get; set; }
+        public int Stock { get; set; }
         public Supplier Supplier { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
@@ -108,7 +109,7 @@ namespace Tussentijds_Project
         [MaxLength(50)]
         public string Name { get; set; }
         [MaxLength(50)]
-        public string Address { get; set; }
+        public string Address { get; set; }        
     }
     public class OrderManagerContext : DbContext
     {

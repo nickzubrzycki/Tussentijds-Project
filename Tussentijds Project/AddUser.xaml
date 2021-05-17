@@ -42,7 +42,7 @@
                 </StackPanel>                
             </StackPanel>
             <StackPanel Margin="0,30" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnAdd" Width="150" Margin="10" Click="Button_Click">Gebruiker toevoegen</Button>
+                <Button Width="150" Margin="10" Click="Button_Click">Gebruiker toevoegen</Button>
                 <Button Width="150" Margin="10" Click="Button_Click_1">Annuleren</Button>
             </StackPanel>
         </StackPanel>

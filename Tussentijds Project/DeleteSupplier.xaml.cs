@@ -15,44 +15,40 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for DeleteUser.xaml
+    /// Interaction logic for DeleteSupplier.xaml
     /// </summary>
-    public partial class DeleteUser : Window
+    public partial class DeleteSupplier : Window
     {
-        public DeleteUser()
+        public DeleteSupplier()
         {
             InitializeComponent();
 
             using (var ctx = new OrderManagerContext())
             {
-                cbUsers.ItemsSource = ctx.Users.ToList();
+                cbSuppliers.ItemsSource = ctx.Suppliers.ToList();
             }
-        }
+        }        
 
-        private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            User selected = cbUsers.SelectedItem as User;
+            Supplier selected = cbSuppliers.SelectedItem as Supplier;
 
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Users.Remove(ctx.Users.FirstOrDefault(u => u.UserId == selected.UserId));
+                ctx.Suppliers.Remove(ctx.Suppliers.FirstOrDefault(s => s.SupplierId == selected.SupplierId));
                 ctx.SaveChanges();
             }
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataSuppliers suppliers = new DataSuppliers();
+            suppliers.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataSuppliers suppliers = new DataSuppliers();
+            suppliers.Show();
         }
+        
     }
 }

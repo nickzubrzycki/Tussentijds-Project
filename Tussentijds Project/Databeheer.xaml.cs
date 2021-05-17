@@ -48,7 +48,9 @@ namespace Tussentijds_Project
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            DataMagazijn magazijn = new DataMagazijn();
+            Hide();
+            magazijn.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

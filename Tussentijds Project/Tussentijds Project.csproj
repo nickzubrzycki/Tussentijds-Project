@@ -66,6 +66,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActiveUser.cs" />
+    <Compile Include="AddProduct.xaml.cs">
+      <DependentUpon>AddProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddSupplier.xaml.cs">
+      <DependentUpon>AddSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -75,11 +81,23 @@
     <Compile Include="Databeheer.xaml.cs">
       <DependentUpon>Databeheer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataMagazijn.xaml.cs">
+      <DependentUpon>DataMagazijn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSuppliers.xaml.cs">
+      <DependentUpon>DataSuppliers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataUsers.xaml.cs">
       <DependentUpon>DataUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeleteSupplier.xaml.cs">
+      <DependentUpon>DeleteSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteUser.xaml.cs">
       <DependentUpon>DeleteUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditSupplier.xaml.cs">
+      <DependentUpon>EditSupplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditUser.xaml.cs">
       <DependentUpon>EditUser.xaml</DependentUpon>
@@ -91,6 +109,14 @@
     <Compile Include="UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,11 +129,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataMagazijn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataSuppliers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteSupplier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeleteUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
