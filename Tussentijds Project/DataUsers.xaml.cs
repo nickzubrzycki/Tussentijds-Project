@@ -38,17 +38,23 @@ namespace Tussentijds_Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            Close();
+            AddUser add = new AddUser();
+            add.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            Close();
+            EditUser edit = new EditUser();
+            edit.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            Close();
+            DeleteUser delete = new DeleteUser();
+            delete.Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)

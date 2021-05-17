@@ -54,7 +54,7 @@ namespace Tussentijds_Project
                     MessageBox.Show("Ongeldige username");
                 else
                 {
-                    if (user.Password == User.Encryption(txtPassword.Text))
+                    if (user.Password == User.Encryption(txtPassword.Password))
                     {
                         ActiveUser.UserId = user.UserId;
                         ActiveUser.FirstName = user.FirstName;

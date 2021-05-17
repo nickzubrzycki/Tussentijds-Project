@@ -6,19 +6,19 @@
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
         Title="DataUsers" Height="450" Width="800">
-    <Grid Background="AliceBlue">
-        <StackPanel>
+    <Grid Background="AliceBlue">        
+        <StackPanel Grid.ColumnSpan="3">
             <Label x:Name="lblUser"></Label>
             <Label x:Name="lblRole"></Label>
         </StackPanel>
-        <DockPanel>            
-            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center">
+        <DockPanel Grid.ColumnSpan="3">
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
                 <Button Margin="10" Width="100" Click="Button_Click">Toevoegen</Button>
                 <Button Margin="10" Click="Button_Click_1">Bewerken</Button>
                 <Button Margin="10" Click="Button_Click_2">Verwijderen</Button>
             </StackPanel>
-            <Button DockPanel.Dock="Bottom" Width="150" Margin="10" Click="Button_Click_3">Terug</Button>
-            <DataGrid DockPanel.Dock="Left" x:Name="dgUsers" Margin="80" ItemsSource="{Binding}" IsReadOnly="true"></DataGrid>
+            <Button DockPanel.Dock="Bottom" Width="150" Margin="30" Click="Button_Click_3">Terug</Button>
+            <DataGrid DockPanel.Dock="Left" x:Name="dgUsers" Margin="80,80,50,50" ItemsSource="{Binding}" IsReadOnly="true"></DataGrid>
         </DockPanel>
     </Grid>
 </Window>

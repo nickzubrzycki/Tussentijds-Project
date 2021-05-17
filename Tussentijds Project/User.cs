@@ -34,6 +34,10 @@ namespace Tussentijds_Project
         {
 
         }
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
         public static string Encryption(string password)
         {
             char[] charPassword = password.ToCharArray();

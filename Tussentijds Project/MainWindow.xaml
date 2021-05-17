@@ -14,9 +14,9 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Label Width="70">Password:</Label>
-                <TextBox x:Name="txtPassword" Width="200" VerticalContentAlignment="Center"></TextBox>
+                <PasswordBox x:Name="txtPassword" Width="200" VerticalContentAlignment="Center"></PasswordBox>
             </StackPanel>            
             <Button Width="100" Margin="20" HorizontalAlignment="Center" Click="Button_Click">Log in</Button>
-        </StackPanel>
+        </StackPanel>        
     </Grid>
 </Window>
