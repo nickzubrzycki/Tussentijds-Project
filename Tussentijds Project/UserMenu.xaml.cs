@@ -34,14 +34,31 @@ namespace Tussentijds_Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Databeheer data = new Databeheer();
+            //Databeheer data = new Databeheer();
+            //Hide();
+            //data.Show();
+
+            DatabeheerAdmin data = new DatabeheerAdmin();
             Hide();
             data.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (ActiveUser.Role == "Magazijnier")
+            {
+                OverzichtMagazijn magazijn = new OverzichtMagazijn();
+                Hide();
+                magazijn.Show();
+            }
+            else if (ActiveUser.Role == "Verkoper")
+            {
 
+            }
+            else
+            {
+
+            }
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

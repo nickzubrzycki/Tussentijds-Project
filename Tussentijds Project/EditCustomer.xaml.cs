@@ -42,6 +42,9 @@ namespace Tussentijds_Project
                 ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId).Address = txtAdres.Text;
                 ctx.SaveChanges();
             }
+            Close();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)

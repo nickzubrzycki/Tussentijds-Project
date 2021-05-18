@@ -84,6 +84,9 @@
     <Compile Include="Databeheer.xaml.cs">
       <DependentUpon>Databeheer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabeheerAdmin.xaml.cs">
+      <DependentUpon>DatabeheerAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataCustomers.xaml.cs">
       <DependentUpon>DataCustomers.xaml</DependentUpon>
     </Compile>
@@ -95,6 +98,9 @@
     </Compile>
     <Compile Include="DataUsers.xaml.cs">
       <DependentUpon>DataUsers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteCustomer.xaml.cs">
+      <DependentUpon>DeleteCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteProduct.xaml.cs">
       <DependentUpon>DeleteProduct.xaml</DependentUpon>
@@ -119,6 +125,9 @@
     </Compile>
     <Compile Include="Overzicht.xaml.cs">
       <DependentUpon>Overzicht.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OverzichtMagazijn.xaml.cs">
+      <DependentUpon>OverzichtMagazijn.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="UserMenu.xaml.cs">
@@ -148,6 +157,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DatabeheerAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataCustomers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DataUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeleteCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,6 +222,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Overzicht.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OverzichtMagazijn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

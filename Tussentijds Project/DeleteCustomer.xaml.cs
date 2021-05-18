@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for DataCustomers.xaml
+    /// Interaction logic for DeleteCustomer.xaml
     /// </summary>
-    public partial class DataCustomers : Window
+    public partial class DeleteCustomer : Window
     {
-        public DataCustomers()
+        public DeleteCustomer()
         {
             InitializeComponent();
 
@@ -28,36 +28,29 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                dgCustomers.ItemsSource = ctx.Customers.Select(c => new { Name = c.Name, Address = c.Address }).ToList();
+                cbCustomers.ItemsSource = ctx.Customers.ToList();
             }
-        }        
-
-        private void Button_Click_Add(object sender, RoutedEventArgs e)
-        {
-            Close();
-            AddCustomer add = new AddCustomer();
-            add.Show();
-        }
-
-        private void Button_Click_Edit(object sender, RoutedEventArgs e)
-        {
-            Close();
-            EditCustomer edit = new EditCustomer();
-            edit.Show();
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
+            Customer selected = cbCustomers.SelectedItem as Customer;
+
+            using (var ctx = new OrderManagerContext())
+            {
+                ctx.Customers.Remove(ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId));
+                ctx.SaveChanges();
+            }
             Close();
-            DeleteCustomer delete = new DeleteCustomer();
-            delete.Show();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
-            Databeheer data = new Databeheer();
-            data.Show();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
     }
 }

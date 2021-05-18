@@ -55,7 +55,9 @@ namespace Tussentijds_Project
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-
+            DataCustomers customers = new DataCustomers();
+            Hide();
+            customers.Show();
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
