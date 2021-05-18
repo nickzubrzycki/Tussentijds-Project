@@ -37,17 +37,23 @@ namespace Tussentijds_Project
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-
+            Close();
+            AddProduct add = new AddProduct();
+            add.Show();
         }
 
         private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-
+            Close();
+            EditProduct edit = new EditProduct();
+            edit.Show();
         }
 
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-
+            Close();
+            DeleteProduct delete = new DeleteProduct();
+            delete.Show();
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)

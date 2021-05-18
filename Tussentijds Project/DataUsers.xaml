@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
         Title="DataUsers" Height="450" Width="800">
-    <Grid Background="AliceBlue">        
-        <StackPanel Grid.ColumnSpan="3">
-            <Label x:Name="lblUser"></Label>
-            <Label x:Name="lblRole"></Label>
+    <Grid Background="AliceBlue">
+        <StackPanel HorizontalAlignment="Left">
+            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
+            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
         </StackPanel>
         <DockPanel Grid.ColumnSpan="3">
             <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">

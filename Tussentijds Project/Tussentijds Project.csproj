@@ -66,6 +66,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActiveUser.cs" />
+    <Compile Include="AddCustomer.xaml.cs">
+      <DependentUpon>AddCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddProduct.xaml.cs">
       <DependentUpon>AddProduct.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,9 @@
     <Compile Include="Databeheer.xaml.cs">
       <DependentUpon>Databeheer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataCustomers.xaml.cs">
+      <DependentUpon>DataCustomers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataMagazijn.xaml.cs">
       <DependentUpon>DataMagazijn.xaml</DependentUpon>
     </Compile>
@@ -90,11 +96,20 @@
     <Compile Include="DataUsers.xaml.cs">
       <DependentUpon>DataUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeleteProduct.xaml.cs">
+      <DependentUpon>DeleteProduct.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeleteSupplier.xaml.cs">
       <DependentUpon>DeleteSupplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="DeleteUser.xaml.cs">
       <DependentUpon>DeleteUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditCustomer.xaml.cs">
+      <DependentUpon>EditCustomer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EditProduct.xaml.cs">
+      <DependentUpon>EditProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditSupplier.xaml.cs">
       <DependentUpon>EditSupplier.xaml</DependentUpon>
@@ -109,6 +124,10 @@
     <Compile Include="UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DataCustomers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DataMagazijn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,11 +164,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DeleteSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DeleteUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,19 +1,19 @@
-﻿<Window x:Class="Tussentijds_Project.EditSupplier"
+﻿<Window x:Class="Tussentijds_Project.EditCustomer"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="EditSupplier" Height="450" Width="800">
+        Title="EditCustomer" Height="450" Width="800">
     <Grid Background="AliceBlue">
         <StackPanel HorizontalAlignment="Left">
             <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
             <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
         </StackPanel>
         <DockPanel Margin="40">
-            <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Margin="10">Selecteer een leverancier om te bewerken.</Label>
-            <ComboBox DockPanel.Dock="Left" x:Name="cbSuppliers" Width="200" Height="35" VerticalAlignment="Top" Margin="10" SelectionChanged="cbUsers_SelectionChanged">
+            <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center" Margin="10">Selecteer een klant om te bewerken.</Label>
+            <ComboBox DockPanel.Dock="Left" x:Name="cbCustomers" Width="200" Height="35" VerticalAlignment="Top" Margin="10" SelectionChanged="cbCustomers_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <Label Content="{Binding Name}"></Label>
@@ -33,7 +33,7 @@
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <Label Width="85">Adres:</Label>
                         <TextBox x:Name="txtAdres" Width="300" VerticalContentAlignment="Center"></TextBox>
-                    </StackPanel>                    
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </DockPanel>

@@ -15,48 +15,35 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for DeleteUser.xaml
+    /// Interaction logic for AddCustomer.xaml
     /// </summary>
-    public partial class DeleteUser : Window
+    public partial class AddCustomer : Window
     {
-        public DeleteUser()
+        public AddCustomer()
         {
             InitializeComponent();
 
             lblUser.Content = $"User: {ActiveUser.FirstName} {ActiveUser.LastName}";
             lblRole.Content = $"Role: {ActiveUser.Role}";
-
-            using (var ctx = new OrderManagerContext())
-            {
-                cbUsers.ItemsSource = ctx.Users.ToList();
-            }
         }
 
-        private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            User selected = cbUsers.SelectedItem as User;
-
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Users.Remove(ctx.Users.FirstOrDefault(u => u.UserId == selected.UserId));
+                ctx.Customers.Add(new Customer() { Name = txtNaam.Text, Address = txtAdres.Text });
                 ctx.SaveChanges();
             }
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
-        
     }
 }

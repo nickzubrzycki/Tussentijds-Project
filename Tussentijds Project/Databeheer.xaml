@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="Databeheer" Height="450" Width="800">
     <Grid Background="AliceBlue">
-        <StackPanel>
-            <Label x:Name="lblUser"></Label>
-            <Label x:Name="lblRole"></Label>
+        <StackPanel HorizontalAlignment="Left">
+            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
+            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
         </StackPanel>
         <StackPanel Margin="50" VerticalAlignment="Center">
             <Button x:Name="btnUsers" Width="150" Margin="10" Click="Button_Click">Users</Button>
             <Button x:Name="btnMagazijn" Width="150" Margin="10" Click="Button_Click_1">Magazijn</Button>
-            <Button x:Name="btnVerkoop" Width="150" Margin="10" Click="Button_Click_2">Verkoop</Button>
+            <Button x:Name="btnVerkoop" Width="150" Margin="10" Click="Button_Click_2">Klanten</Button>
             <Button Width="150" Margin="30" Click="Button_Click_3">Terug</Button>
         </StackPanel>
     </Grid>

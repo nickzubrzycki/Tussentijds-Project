@@ -22,6 +22,9 @@ namespace Tussentijds_Project
         public AddSupplier()
         {
             InitializeComponent();
+
+            lblUser.Content = $"User: {ActiveUser.FirstName} {ActiveUser.LastName}";
+            lblRole.Content = $"Role: {ActiveUser.Role}";
         }
 
         private void Button_Click_Add(object sender, RoutedEventArgs e)

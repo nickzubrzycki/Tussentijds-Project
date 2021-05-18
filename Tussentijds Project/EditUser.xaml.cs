@@ -23,6 +23,9 @@ namespace Tussentijds_Project
         {
             InitializeComponent();
 
+            lblUser.Content = $"User: {ActiveUser.FirstName} {ActiveUser.LastName}";
+            lblRole.Content = $"Role: {ActiveUser.Role}";
+
             using (var ctx = new OrderManagerContext())
             {
                 cbUsers.ItemsSource = ctx.Users.ToList();

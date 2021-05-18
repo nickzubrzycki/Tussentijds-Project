@@ -21,7 +21,10 @@ namespace Tussentijds_Project
     {
         public AddUser()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            lblUser.Content = $"User: {ActiveUser.FirstName} {ActiveUser.LastName}";
+            lblRole.Content = $"Role: {ActiveUser.Role}";
 
             using (var ctx = new OrderManagerContext())
             {

@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="AddUser" Height="450" Width="800">
     <Grid Background="AliceBlue">
-        <Label HorizontalContentAlignment="Center" Margin="10">Vul onderstaande velden in om een nieuwe user aan te maken.</Label>
-        <StackPanel Margin="70">
+        <StackPanel HorizontalAlignment="Left">
+            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
+            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
+        </StackPanel>        
+        <StackPanel Margin="70,70,70,35">
+            <Label HorizontalContentAlignment="Center" Margin="10">Vul onderstaande velden in om een nieuwe user aan te maken.</Label>
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Label Width="68">Voornaam:</Label>

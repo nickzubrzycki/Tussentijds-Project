@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="DeleteUser" Height="288.636" Width="406.818" SizeToContent="WidthAndHeight">
-    <Grid Background="AliceBlue" Margin="-61,0,0,0">
-        <Label HorizontalContentAlignment="Center" Margin="10" Grid.ColumnSpan="2">Selecteer de user die u wenst te verwijderen.</Label>
-        <StackPanel Margin="60">
+        Title="DeleteUser" Height="321.591" Width="530.682">
+    <Grid Background="AliceBlue">
+        <StackPanel HorizontalAlignment="Left">
+            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
+            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
+        </StackPanel>        
+        <StackPanel Margin="50,50,50,25">
+            <Label HorizontalContentAlignment="Center" Margin="10" Grid.ColumnSpan="2">Selecteer de user die u wenst te verwijderen.</Label>
             <ComboBox x:Name="cbUsers" Width="200" SelectionChanged="cbUsers_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

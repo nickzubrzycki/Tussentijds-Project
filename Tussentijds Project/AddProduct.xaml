@@ -7,8 +7,12 @@
         mc:Ignorable="d"
         Title="AddProduct" Height="450" Width="800">
     <Grid Background="AliceBlue">
-        <Label HorizontalContentAlignment="Center" Margin="10">Vul onderstaande velden in om een product toe te voegen.</Label>
+        <StackPanel HorizontalAlignment="Left">
+            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
+            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
+        </StackPanel>        
         <StackPanel Margin="50">
+            <Label HorizontalContentAlignment="Center" Margin="10">Vul onderstaande velden in om een product toe te voegen.</Label>
             <StackPanel Orientation="Horizontal" Margin="10">                
                 <Label Width="90">Naam:</Label>
                 <TextBox x:Name="txtNaam" Width="300" VerticalContentAlignment="Center"></TextBox>                           
@@ -36,8 +40,8 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Margin="0,30" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Width="150" Margin="10" Click="Button_Click">Product toevoegen</Button>
-                <Button Width="150" Margin="10" Click="Button_Click_1">Annuleren</Button>
+                <Button Width="150" Margin="10" Click="Button_Click_Add">Product toevoegen</Button>
+                <Button Width="150" Margin="10" Click="Button_Click_Back">Annuleren</Button>
             </StackPanel>
         </StackPanel>
     </Grid>

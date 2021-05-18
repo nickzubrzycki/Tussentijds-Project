@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for DeleteUser.xaml
+    /// Interaction logic for DeleteProduct.xaml
     /// </summary>
-    public partial class DeleteUser : Window
+    public partial class DeleteProduct : Window
     {
-        public DeleteUser()
+        public DeleteProduct()
         {
             InitializeComponent();
 
@@ -28,35 +28,29 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                cbUsers.ItemsSource = ctx.Users.ToList();
+                cbProducts.ItemsSource = ctx.Products.ToList();
             }
         }
 
-        private void cbUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            User selected = cbUsers.SelectedItem as User;
+            Product selected = cbProducts.SelectedItem as Product;
 
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Users.Remove(ctx.Users.FirstOrDefault(u => u.UserId == selected.UserId));
+                ctx.Products.Remove(ctx.Products.FirstOrDefault(p => p.ProductId == selected.ProductId));
                 ctx.SaveChanges();
             }
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataMagazijn magazijn = new DataMagazijn();
+            magazijn.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
-            DataUsers users = new DataUsers();
-            users.Show();
+            DataMagazijn magazijn = new DataMagazijn();
+            magazijn.Show();
         }
-        
     }
 }

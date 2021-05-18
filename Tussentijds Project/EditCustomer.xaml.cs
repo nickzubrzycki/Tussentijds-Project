@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for DeleteSupplier.xaml
+    /// Interaction logic for EditCustomer.xaml
     /// </summary>
-    public partial class DeleteSupplier : Window
+    public partial class EditCustomer : Window
     {
-        public DeleteSupplier()
+        public EditCustomer()
         {
             InitializeComponent();
 
@@ -28,30 +28,35 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                cbSuppliers.ItemsSource = ctx.Suppliers.ToList();
+                cbCustomers.ItemsSource = ctx.Customers.ToList();
             }
-        }        
+        }
 
-        private void Button_Click_Delete(object sender, RoutedEventArgs e)
+        private void Button_Click_Edit(object sender, RoutedEventArgs e)
         {
-            Supplier selected = cbSuppliers.SelectedItem as Supplier;
+            Customer selected = cbCustomers.SelectedItem as Customer;
 
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Suppliers.Remove(ctx.Suppliers.FirstOrDefault(s => s.SupplierId == selected.SupplierId));
+                ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId).Name = txtNaam.Text;
+                ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId).Address = txtAdres.Text;
                 ctx.SaveChanges();
             }
-            Close();
-            DataSuppliers suppliers = new DataSuppliers();
-            suppliers.Show();
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
-            DataSuppliers suppliers = new DataSuppliers();
-            suppliers.Show();
+            DataCustomers customers = new DataCustomers();
+            customers.Show();
         }
-        
+
+        private void cbCustomers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Customer selected = cbCustomers.SelectedItem as Customer;
+
+            txtNaam.Text = selected.Name;
+            txtAdres.Text = selected.Address;
+        }
     }
 }
