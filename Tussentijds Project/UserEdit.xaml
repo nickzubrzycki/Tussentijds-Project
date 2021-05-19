@@ -1,0 +1,83 @@
+﻿<Page x:Class="Tussentijds_Project.UserEdit"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Tussentijds_Project"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserEdit">
+
+    <Grid Background="AliceBlue">
+        <DockPanel Grid.ColumnSpan="3">
+            <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <Label VerticalAlignment="Center" Width="78">Voornaam:</Label>
+                    <TextBox x:Name="txtVoornaam" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label VerticalAlignment="Center" Width="78">Achternaam:</Label>
+                    <TextBox x:Name="txtAchternaam" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label VerticalAlignment="Center" Width="78">Username:</Label>
+                    <TextBox x:Name="txtUsername" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label VerticalAlignment="Center" Width="78">Password:</Label>
+                    <TextBox x:Name="txtPassword" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label VerticalAlignment="Center" Width="78">Role:</Label>
+                    <ComboBox x:Name="cbRoles" Height="35" Width="200" VerticalContentAlignment="Center" Margin="0,10">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Name}"></Label>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+                <Button Width="150" Margin="0,30" Click="Button_Click">Wijzigingen opslaan</Button>
+            </StackPanel>
+            <DataGrid DockPanel.Dock="Left" x:Name="dgUsers" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" SelectionChanged="dgUsers_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Voornaam" Width="95">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding FirstName}"></Label>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Achternaam" Width="95">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding LastName}"></Label>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Username" Width="75">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Username}"></Label>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Password" Width="75">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Password}"></Label>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Role" Width="95">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Role}"></Label>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Page>

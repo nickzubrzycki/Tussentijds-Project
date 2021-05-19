@@ -28,35 +28,96 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                dgUsers.ItemsSource = ctx.Users.Join(ctx.Roles,
+                dgUsersAdd.ItemsSource = ctx.Users.Join(ctx.Roles,
                     u => u.Role.RoleId,
                     r => r.RoleId,
                     (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
 
-                cbRoles.ItemsSource = ctx.Roles.ToList();
-            }
+                cbRolesAdd.ItemsSource = ctx.Roles.ToList();
+
+                dgUsersEdit.ItemsSource = ctx.Users.Join(ctx.Roles,
+                    u => u.Role.RoleId,
+                    r => r.RoleId,
+                    (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
+
+                cbUsersEdit.ItemsSource = ctx.Users.ToList();
+                cbRolesEdit.ItemsSource = ctx.Roles.ToList();
+            }            
         }    
                 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_AddUser(object sender, RoutedEventArgs e)
         {
-            Role selected = cbRoles.SelectedItem as Role;
+            Role selected = cbRolesAdd.SelectedItem as Role;
 
             using (var ctx = new OrderManagerContext())
             {
-                ctx.Users.Add(new User(txtVoornaam.Text, txtAchternaam.Text, txtUsername.Text, txtPassword.Text, ctx.Roles.FirstOrDefault(r => r.RoleId == selected.RoleId)));
+                ctx.Users.Add(new User(txtVoornaamAdd.Text, txtAchternaamAdd.Text, txtUsernameAdd.Text, txtPasswordAdd.Text, ctx.Roles.FirstOrDefault(r => r.RoleId == selected.RoleId)));
                 ctx.SaveChanges();
 
-                dgUsers.ItemsSource = null;
-                dgUsers.ItemsSource = ctx.Users.Join(ctx.Roles,
+                dgUsersAdd.ItemsSource = null;
+                dgUsersAdd.ItemsSource = ctx.Users.Join(ctx.Roles,
                         u => u.Role.RoleId,
                         r => r.RoleId,
                         (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
+
+                dgUsersEdit.ItemsSource = null;
+                dgUsersEdit.ItemsSource = ctx.Users.Join(ctx.Roles,
+                   u => u.Role.RoleId,
+                   r => r.RoleId,
+                   (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
+                dgUsersEdit.SelectedItem = ctx.Users;
+            }            
+            txtVoornaamAdd.Clear();
+            txtAchternaamAdd.Clear();
+            txtUsernameAdd.Clear();
+            txtPasswordAdd.Clear();
+            cbRolesAdd.SelectedItem = null;
+        }
+
+        private void Button_Click_Edit(object sender, RoutedEventArgs e)
+        {
+            User selectedUser = dgUsersEdit.SelectedItem as User;
+            Role selectedRole = cbRolesEdit.SelectedItem as Role;
+
+            using (var ctx = new OrderManagerContext())
+            {
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).FirstName = txtVoornaamEdit.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).LastName = txtAchternaamEdit.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Username = txtUsernameEdit.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Password = txtPasswordEdit.Text;
+                ctx.Users.FirstOrDefault(u => u.UserId == selectedUser.UserId).Role = ctx.Roles.FirstOrDefault(r => r.RoleId == selectedRole.RoleId);
+                ctx.SaveChanges();
+
+                dgUsersAdd.ItemsSource = null;
+                dgUsersAdd.ItemsSource = ctx.Users.Join(ctx.Roles,
+                        u => u.Role.RoleId,
+                        r => r.RoleId,
+                        (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
+
+                dgUsersEdit.ItemsSource = null;
+                dgUsersEdit.ItemsSource = ctx.Users.Join(ctx.Roles,
+                   u => u.Role.RoleId,
+                   r => r.RoleId,
+                   (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
             }
-            txtVoornaam.Clear();
-            txtAchternaam.Clear();
-            txtUsername.Clear();
-            txtPassword.Clear();           
-            
+            cbUsersEdit.SelectedItem = null;
+            txtVoornaamEdit.Clear();
+            txtAchternaamEdit.Clear();
+            txtUsernameEdit.Clear();
+            txtPasswordEdit.Clear();
+            cbRolesEdit.SelectedItem = null;
+
+        }        
+
+        private void cbUsersEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            User selected = cbUsersEdit.SelectedItem as User;
+
+            txtVoornaamEdit.Text = selected.FirstName;
+            txtAchternaamEdit.Text = selected.LastName;
+            txtUsernameEdit.Text = selected.Username;
+            txtPasswordEdit.Text = selected.Password;
+            cbRolesEdit.SelectedItem = selected.Role;
         }
     }
 }

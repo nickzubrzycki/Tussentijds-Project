@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="DatabeheerAdmin" Height="450" Width="800">
+        Title="Databeheer" Height="450" Width="800">
     <Grid Background="AliceBlue">
         <StackPanel>
             <DockPanel>
-                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic"></Label>
-                <Button DockPanel.Dock="Right" Width="100" Height="19" HorizontalAlignment="Right" Margin="10,0">Terug</Button>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3">Terug</Button>
             </DockPanel>            
             <TabControl>
                 <TabItem Header="Users">
@@ -20,23 +20,23 @@
                                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Voornaam:</Label>
-                                        <TextBox x:Name="txtVoornaam" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                        <TextBox x:Name="txtVoornaamAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Achternaam:</Label>
-                                        <TextBox x:Name="txtAchternaam" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                        <TextBox x:Name="txtAchternaamAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Username:</Label>
-                                        <TextBox x:Name="txtUsername" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                        <TextBox x:Name="txtUsernameAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Password:</Label>
-                                        <TextBox x:Name="txtPassword" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                        <TextBox x:Name="txtPasswordAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Role:</Label>
-                                        <ComboBox x:Name="cbRoles" Height="35" Width="200" VerticalContentAlignment="Center">
+                                        <ComboBox x:Name="cbRolesAdd" Height="35" Width="200" VerticalContentAlignment="Center" Margin="0,10">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Label Content="{Binding Name}"></Label>
@@ -44,9 +44,9 @@
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
                                     </StackPanel>                                    
-                                    <Button Width="120" Margin="0,30" Click="Button_Click">User toevoegen</Button>
+                                    <Button Width="120" Margin="0,30" Click="Button_Click_AddUser">User toevoegen</Button>
                                 </StackPanel>                                
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsers" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersAdd" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Voornaam" Width="95">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -87,8 +87,90 @@
                                 </DataGrid>                                
                             </DockPanel>
                         </TabItem>
-                        <TabItem Header="User bewerken"></TabItem>
-                        <TabItem Header="User verwijderen"></TabItem>
+                        <TabItem Header="User bewerken">
+                            <DockPanel Grid.ColumnSpan="3">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                    <StackPanel>
+                                        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een user om te bewerken:</Label>
+                                        <ComboBox DockPanel.Dock="Left" x:Name="cbUsersEdit" Width="200" Height="25" VerticalAlignment="Top" SelectionChanged="cbUsersEdit_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="78">Voornaam:</Label>
+                                        <TextBox x:Name="txtVoornaamEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="78">Achternaam:</Label>
+                                        <TextBox x:Name="txtAchternaamEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="78">Username:</Label>
+                                        <TextBox x:Name="txtUsernameEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="78">Password:</Label>
+                                        <TextBox x:Name="txtPasswordEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="78">Role:</Label>
+                                        <ComboBox x:Name="cbRolesEdit" Height="35" Width="200" VerticalContentAlignment="Center" Margin="0,10">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button Width="150" Margin="0,25" Click="Button_Click_Edit">Wijzigingen opslaan</Button>
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersEdit" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Voornaam" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding FirstName}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Achternaam" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding LastName}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Username" Width="75">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Username}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Password" Width="75">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Password}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Role" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Role}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </TabItem>
+                        <TabItem Header="User verwijderen">                            
+                        </TabItem>
                     </TabControl>                    
                 </TabItem>
                 <TabItem Header="Magazijn">
