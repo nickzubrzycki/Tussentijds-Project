@@ -44,7 +44,6 @@ namespace Tussentijds_Project
 
             for (int i = 0; i < charPassword.Length; i++)
             {
-
                 if (i == 127)
                 {
                     charPassword[i] = (char)1;

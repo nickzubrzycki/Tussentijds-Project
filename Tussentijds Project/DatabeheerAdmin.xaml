@@ -17,7 +17,7 @@
                     <TabControl>
                         <TabItem Header="User toevoegen">
                             <DockPanel Grid.ColumnSpan="3">
-                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">                                    
                                     <StackPanel Orientation="Horizontal">
                                         <Label VerticalAlignment="Center" Width="78">Voornaam:</Label>
                                         <TextBox x:Name="txtVoornaamAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
@@ -92,7 +92,7 @@
                                 <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
                                     <StackPanel>
                                         <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een user om te bewerken:</Label>
-                                        <ComboBox DockPanel.Dock="Left" x:Name="cbUsersEdit" Width="200" Height="25" VerticalAlignment="Top" SelectionChanged="cbUsersEdit_SelectionChanged">
+                                        <ComboBox DockPanel.Dock="Left" x:Name="cbUsersEdit" Width="200" Height="35" VerticalAlignment="Top" SelectionChanged="cbUsersEdit_SelectionChanged">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <Label Content="{Binding}"></Label>
@@ -126,7 +126,7 @@
                                             </ComboBox.ItemTemplate>
                                         </ComboBox>
                                     </StackPanel>
-                                    <Button Width="150" Margin="0,25" Click="Button_Click_Edit">Wijzigingen opslaan</Button>
+                                    <Button Width="150" Margin="0,20" Click="Button_Click_Edit">Wijzigingen opslaan</Button>
                                 </StackPanel>
                                 <DataGrid DockPanel.Dock="Left" x:Name="dgUsersEdit" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <DataGrid.Columns>
@@ -169,7 +169,61 @@
                                 </DataGrid>
                             </DockPanel>
                         </TabItem>
-                        <TabItem Header="User verwijderen">                            
+                        <TabItem Header="User verwijderen">
+                            <DockPanel Grid.ColumnSpan="3">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                    <StackPanel>
+                                        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een user om te verwijderen:</Label>
+                                        <ComboBox DockPanel.Dock="Left" x:Name="cbUsersDelete" Width="200" Height="35" VerticalAlignment="Top">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>                                    
+                                    <Button Width="150" Margin="0,20" Click="Button_Click_Delete">User verwijderen</Button>
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersDelete" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Voornaam" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding FirstName}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Achternaam" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding LastName}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Username" Width="75">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Username}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Password" Width="75">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Password}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Role" Width="95">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Role}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
                         </TabItem>
                     </TabControl>                    
                 </TabItem>

@@ -60,6 +60,7 @@ namespace Tussentijds_Project
                         ActiveUser.FirstName = user.FirstName;
                         ActiveUser.LastName = user.LastName;
                         ActiveUser.Role = user.Role.Name;
+                        MessageBox.Show($"Welkom, {ActiveUser.FirstName}!", "", MessageBoxButton.OK, MessageBoxImage.Information);
                         UserMenu menu = new UserMenu();
                         Hide();
                         menu.Show();
