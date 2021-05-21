@@ -22,6 +22,27 @@ namespace Tussentijds_Project
         public OverzichtMagazijn()
         {
             InitializeComponent();
+
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
+
+            using (var ctx = new OrderManagerContext())
+            {
+                dgMagazijn.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    p => p.Supplier.SupplierId,
+                    s => s.SupplierId,
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+            }
+        }
+        private void Button_Click_Back(object sender, RoutedEventArgs e)
+        {
+            Close();
+            UserMenu menu = new UserMenu();
+            menu.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

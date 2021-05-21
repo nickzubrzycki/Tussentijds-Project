@@ -66,149 +66,31 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ActiveUser.cs" />
-    <Compile Include="AddCustomer.xaml.cs">
-      <DependentUpon>AddCustomer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddProduct.xaml.cs">
-      <DependentUpon>AddProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddSupplier.xaml.cs">
-      <DependentUpon>AddSupplier.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddUser.xaml.cs">
-      <DependentUpon>AddUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Bestelling.xaml.cs">
-      <DependentUpon>Bestelling.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Databeheer.xaml.cs">
-      <DependentUpon>Databeheer.xaml</DependentUpon>
-    </Compile>
     <Compile Include="DatabeheerAdmin.xaml.cs">
       <DependentUpon>DatabeheerAdmin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataCustomers.xaml.cs">
-      <DependentUpon>DataCustomers.xaml</DependentUpon>
+    <Compile Include="DatabeheerKlanten.xaml.cs">
+      <DependentUpon>DatabeheerKlanten.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataMagazijn.xaml.cs">
-      <DependentUpon>DataMagazijn.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DataSuppliers.xaml.cs">
-      <DependentUpon>DataSuppliers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DataUsers.xaml.cs">
-      <DependentUpon>DataUsers.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteCustomer.xaml.cs">
-      <DependentUpon>DeleteCustomer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteProduct.xaml.cs">
-      <DependentUpon>DeleteProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteSupplier.xaml.cs">
-      <DependentUpon>DeleteSupplier.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DeleteUser.xaml.cs">
-      <DependentUpon>DeleteUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditCustomer.xaml.cs">
-      <DependentUpon>EditCustomer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditProduct.xaml.cs">
-      <DependentUpon>EditProduct.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditSupplier.xaml.cs">
-      <DependentUpon>EditSupplier.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EditUser.xaml.cs">
-      <DependentUpon>EditUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Overzicht.xaml.cs">
-      <DependentUpon>Overzicht.xaml</DependentUpon>
+    <Compile Include="DatabeheerMagazijn.xaml.cs">
+      <DependentUpon>DatabeheerMagazijn.xaml</DependentUpon>
     </Compile>
     <Compile Include="OverzichtMagazijn.xaml.cs">
       <DependentUpon>OverzichtMagazijn.xaml</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="UserEdit.xaml.cs">
-      <DependentUpon>UserEdit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserMenu.xaml.cs">
       <DependentUpon>UserMenu.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddCustomer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddProduct.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddSupplier.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Bestelling.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Databeheer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="DatabeheerAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataCustomers.xaml">
+    <Page Include="DatabeheerKlanten.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataMagazijn.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataSuppliers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DataUsers.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeleteCustomer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeleteProduct.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeleteSupplier.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DeleteUser.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditCustomer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditProduct.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditSupplier.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditUser.xaml">
+    <Page Include="DatabeheerMagazijn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -224,15 +106,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Overzicht.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="OverzichtMagazijn.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,17 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="UserMenu" Height="450" Width="800">
+        Title="Hoofdmenu" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
-        <StackPanel HorizontalAlignment="Left">
-            <Label x:Name="lblUser" Background="LightGray" FontStyle="Italic"></Label>
-            <Label x:Name="lblRole" Background="LightGray" FontStyle="Italic"></Label>
-        </StackPanel>
+        <Label x:Name="lblUser" FontStyle="Italic" VerticalContentAlignment="Top"></Label>        
         <StackPanel Margin="50,110,50,109" VerticalAlignment="Center" Grid.ColumnSpan="2">
-            <Button Width="150" Margin="10" Click="Button_Click">Databeheer</Button>
-            <Button Width="150" Margin="10" Click="Button_Click_1">Overzicht</Button>
-            <Button Width="150" Margin="10" Click="Button_Click_2">Bestelling</Button>
-            <Button Width="150" Margin="30" Click="Button_Click_3">Uitloggen</Button>
+            <Button Width="150" Margin="10" Click="Button_Click_Databeheer">Databeheer</Button>
+            <Button Width="150" Margin="10" Click="Button_Click_Overzicht">Overzicht</Button>
+            <Button Width="150" Margin="10" Click="Button_Click_Bestelling">Bestelling</Button>
+            <Button Width="150" Margin="30" Click="Button_Click_Back">Uitloggen</Button>
         </StackPanel>
     </Grid>
 </Window>

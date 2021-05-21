@@ -28,20 +28,6 @@ namespace Tussentijds_Project
             InitializeComponent();
             //CreateDB();
 
-
-        }
-        public void CreateDB()
-        {
-            using (var ctx = new OrderManagerContext())
-            {
-                ctx.Roles.Add(new Role() { Name = "Administrator" });
-                ctx.Roles.Add(new Role() { Name = "Magazijnier" });
-                ctx.Roles.Add(new Role() { Name = "Verkoper" });
-                ctx.SaveChanges();
-
-                ctx.Users.Add(new User("Nick", "Zubrzycki", "nickz", "nz1983", ctx.Roles.FirstOrDefault(r => r.RoleId == 1)));                
-                ctx.SaveChanges();
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -68,9 +54,22 @@ namespace Tussentijds_Project
                     else
                         MessageBox.Show("Ongeldig password");
                 }
-
             }
-
         }
+
+        public void CreateDB()
+        {
+            using (var ctx = new OrderManagerContext())
+            {
+                ctx.Roles.Add(new Role() { Name = "Administrator" });
+                ctx.Roles.Add(new Role() { Name = "Magazijnier" });
+                ctx.Roles.Add(new Role() { Name = "Verkoper" });
+                ctx.SaveChanges();
+
+                ctx.Users.Add(new User("Nick", "Zubrzycki", "nickz", "nz1983", ctx.Roles.FirstOrDefault(r => r.RoleId == 1)));                
+                ctx.SaveChanges();
+            }
+        }
+        
     }
 }

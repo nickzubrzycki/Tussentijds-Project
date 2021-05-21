@@ -5,8 +5,54 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="OverzichtMagazijn" Height="450" Width="800">
-    <Grid Background="AliceBlue">
-        
+        Title="Overzicht Magazijn" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="AliceBlue">        
+            <StackPanel>
+                <DockPanel>
+                    <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                    <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
+                </DockPanel>
+                <DockPanel>
+                    <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Eenheidsprijs" Width="85" CanUserSort="True" SortMemberPath="UnitPrice">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding UnitPrice}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Aantal" Width="85" CanUserSort="True" SortMemberPath="Stock">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Stock}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Leverancier" Width="140" CanUserSort="True" SortMemberPath="Supplier">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Supplier}"></Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel DockPanel.Dock="Right">
+                    <TextBlock TextDecorations="Underline" >Filter op naam:</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtFilterNaam" Width="150" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5"></TextBox>
+                        <Button Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterNaam">OK</Button>
+                    </StackPanel>                    
+                </StackPanel>
+            </DockPanel>                
+            </StackPanel>             
     </Grid>
 </Window>

@@ -1,0 +1,319 @@
+﻿<Window x:Class="Tussentijds_Project.DatabeheerMagazijn"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tussentijds_Project"
+        mc:Ignorable="d"
+        Title="Databeheer" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="AliceBlue">
+        <StackPanel>
+            <DockPanel>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
+            </DockPanel>
+            <TabControl>
+                <TabItem Header="Magazijn">
+                    <TabControl>
+                        <TabItem Header="Toevoegen">
+                            <DockPanel Grid.ColumnSpan="3">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Naam:</Label>
+                                        <TextBox x:Name="txtNaamProductAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Eenheidsprijs:</Label>
+                                        <TextBox x:Name="txtPrijsAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Aantal:</Label>
+                                        <TextBox x:Name="txtAantalAdd" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Leverancier:</Label>
+                                        <ComboBox x:Name="cbSuppliersAdd" Height="35" Width="200" VerticalContentAlignment="Center" Margin="0,10">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button Width="120" Margin="0,30" Click="Button_Click_AddProduct">Product toevoegen</Button>
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Naam" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Eenheidsprijs" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding UnitPrice}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Aantal" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Stock}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Leverancier" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Supplier}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </TabItem>
+                        <TabItem Header="Bewerken">
+                            <DockPanel Grid.ColumnSpan="3">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                    <StackPanel>
+                                        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een product om te bewerken:</Label>
+                                        <ComboBox DockPanel.Dock="Left" x:Name="cbProductsEdit" Width="200" Height="35" VerticalAlignment="Top" SelectionChanged="cbProductsEdit_SelectionChanged">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Naam:</Label>
+                                        <TextBox x:Name="txtNaamProductEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Eenheidsprijs:</Label>
+                                        <TextBox x:Name="txtPrijsEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Aantal:</Label>
+                                        <TextBox x:Name="txtAantalEdit" Width="200" VerticalContentAlignment="Center" Margin="0,10"></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label VerticalAlignment="Center" Width="85">Leverancier:</Label>
+                                        <ComboBox x:Name="cbSuppliersProductEdit" Height="35" Width="200" VerticalContentAlignment="Center" Margin="0,10">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button Width="150" Margin="0,20" Click="Button_Click_EditProduct">Wijzigingen opslaan</Button>
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Naam" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Eenheidsprijs" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding UnitPrice}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Aantal" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Stock}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Leverancier" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Supplier}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </TabItem>
+                        <TabItem Header="Verwijderen">
+                            <DockPanel Grid.ColumnSpan="3">
+                                <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                    <StackPanel>
+                                        <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een product om te verwijderen:</Label>
+                                        <ComboBox DockPanel.Dock="Left" x:Name="cbProductsDelete" Width="200" Height="35" VerticalAlignment="Top">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <Button Width="150" Margin="0,20" Click="Button_Click_DeleteProduct">Product verwijderen</Button>
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Naam" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Eenheidsprijs" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding UnitPrice}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Aantal" Width="85">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Stock}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn Header="Leverancier" Width="140">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Supplier}"></Label>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DockPanel>
+                        </TabItem>
+                        <TabItem Header="Leveranciers">
+                            <TabControl>
+                                <TabItem Header="Toevoegen">
+                                    <DockPanel Grid.ColumnSpan="3">
+                                        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label VerticalAlignment="Top" Width="45">Naam:</Label>
+                                                <TextBox x:Name="txtNaamSupplierAdd" Width="220" Height="34" VerticalContentAlignment="Top" Margin="0,10" TextWrapping="Wrap"></TextBox>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label VerticalAlignment="Top" Width="45">Adres:</Label>
+                                                <TextBox x:Name="txtAdresSupplierAdd" Width="220" Height="68" VerticalContentAlignment="Top" Margin="0,10" TextWrapping="Wrap"></TextBox>
+                                            </StackPanel>
+                                            <Button Width="140" Margin="0,30" Click="Button_Click_AddSupplier">Leverancier toevoegen</Button>
+                                        </StackPanel>
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn Header="Naam" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Adres" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Address}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DockPanel>
+                                </TabItem>
+                                <TabItem Header="Bewerken">
+                                    <DockPanel Grid.ColumnSpan="3">
+                                        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                            <StackPanel>
+                                                <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een product om te bewerken:</Label>
+                                                <ComboBox DockPanel.Dock="Left" x:Name="cbSuppliersSupplierEdit" Width="200" Height="35" VerticalAlignment="Top" SelectionChanged="cbSuppliersSupplierEdit_SelectionChanged">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label VerticalAlignment="Top" Width="45">Naam:</Label>
+                                                <TextBox x:Name="txtNaamSupplierEdit" Width="220" Height="34" VerticalContentAlignment="Top" Margin="0,10" TextWrapping="Wrap"></TextBox>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label VerticalAlignment="Top" Width="45">Adres:</Label>
+                                                <TextBox x:Name="txtAdresSupplierEdit" Width="220" Height="68" VerticalContentAlignment="Top" Margin="0,10" TextWrapping="Wrap"></TextBox>
+                                            </StackPanel>
+                                            <Button Width="140" Margin="0,30" Click="Button_Click_EditSupplier">Wijzigingen opslaan</Button>
+                                        </StackPanel>
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn Header="Naam" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Adres" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Address}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DockPanel>
+                                </TabItem>
+                                <TabItem Header="Verwijderen">
+                                    <DockPanel Grid.ColumnSpan="3">
+                                        <StackPanel DockPanel.Dock="Right" VerticalAlignment="Center" Margin="10">
+                                            <StackPanel>
+                                                <Label DockPanel.Dock="Top" HorizontalContentAlignment="Center">Selecteer een leverancier om te verwijderen:</Label>
+                                                <ComboBox DockPanel.Dock="Left" x:Name="cbSuppliersDelete" Width="200" Height="35" VerticalAlignment="Top">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <Button Width="150" Margin="0,20" Click="Button_Click_DeleteSupplier">Leverancier verwijderen</Button>
+                                        </StackPanel>
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn Header="Naam" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Adres" Width="240">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Address}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DockPanel>
+                                </TabItem>
+                            </TabControl>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</Window>

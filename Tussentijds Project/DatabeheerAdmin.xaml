@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="Databeheer" Height="450" Width="800">
+        Title="Databeheer" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
         <StackPanel>
             <DockPanel>
-                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" FontWeight="Bold" VerticalContentAlignment="Center"></Label>
-                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3">Terug</Button>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
             </DockPanel>            
             <TabControl>
                 <TabItem Header="Users">
@@ -45,8 +45,8 @@
                                         </ComboBox>
                                     </StackPanel>                                    
                                     <Button Width="120" Margin="0,30" Click="Button_Click_AddUser">User toevoegen</Button>
-                                </StackPanel>                                
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersAdd" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                </StackPanel>
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Voornaam" Width="95">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -128,7 +128,7 @@
                                     </StackPanel>
                                     <Button Width="150" Margin="0,20" Click="Button_Click_EditUser">Wijzigingen opslaan</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersEdit" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Voornaam" Width="95">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -184,7 +184,7 @@
                                     </StackPanel>                                    
                                     <Button Width="150" Margin="0,20" Click="Button_Click_DeleteUser">User verwijderen</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersDelete" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgUsersDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Voornaam" Width="95">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -256,7 +256,7 @@
                                     </StackPanel>
                                     <Button Width="120" Margin="0,30" Click="Button_Click_AddProduct">Product toevoegen</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsAdd" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="140">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -327,7 +327,7 @@
                                     </StackPanel>
                                     <Button Width="150" Margin="0,20" Click="Button_Click_EditProduct">Wijzigingen opslaan</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsEdit" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="140">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -376,7 +376,7 @@
                                     </StackPanel>
                                     <Button Width="150" Margin="0,20" Click="Button_Click_DeleteProduct">Product verwijderen</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsDelete" Margin="0,10" Height="315" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgProductsDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" VerticalAlignment="Top">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="140">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -425,7 +425,7 @@
                                             </StackPanel>                                            
                                             <Button Width="140" Margin="0,30" Click="Button_Click_AddSupplier">Leverancier toevoegen</Button>
                                         </StackPanel>
-                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersAdd" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                             <DataGrid.Columns>
                                                 <DataGridTemplateColumn Header="Naam" Width="240">
                                                     <DataGridTemplateColumn.CellTemplate>
@@ -468,7 +468,7 @@
                                             </StackPanel>
                                             <Button Width="140" Margin="0,30" Click="Button_Click_EditSupplier">Wijzigingen opslaan</Button>
                                         </StackPanel>
-                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersEdit" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                             <DataGrid.Columns>
                                                 <DataGridTemplateColumn Header="Naam" Width="240">
                                                     <DataGridTemplateColumn.CellTemplate>
@@ -503,7 +503,7 @@
                                             </StackPanel>
                                             <Button Width="150" Margin="0,20" Click="Button_Click_DeleteSupplier">Leverancier verwijderen</Button>
                                         </StackPanel>
-                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersDelete" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                        <DataGrid DockPanel.Dock="Left" x:Name="dgSuppliersDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                             <DataGrid.Columns>
                                                 <DataGridTemplateColumn Header="Naam" Width="240">
                                                     <DataGridTemplateColumn.CellTemplate>
@@ -542,7 +542,7 @@
                                     </StackPanel>
                                     <Button Width="140" Margin="0,30" Click="Button_Click_AddCustomer">Klant toevoegen</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersAdd" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersAdd" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="240">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -585,7 +585,7 @@
                                     </StackPanel>
                                     <Button Width="140" Margin="0,30" Click="Button_Click_EditCustomer">Wijzigingen opslaan</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersEdit" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersEdit" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="240">
                                             <DataGridTemplateColumn.CellTemplate>
@@ -620,7 +620,7 @@
                                     </StackPanel>
                                     <Button Width="150" Margin="0,20" Click="Button_Click_DeleteCustomer">Leverancier verwijderen</Button>
                                 </StackPanel>
-                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersDelete" Margin="0,10" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                <DataGrid DockPanel.Dock="Left" x:Name="dgCustomersDelete" Margin="0,10" Height="250" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Naam" Width="240">
                                             <DataGridTemplateColumn.CellTemplate>

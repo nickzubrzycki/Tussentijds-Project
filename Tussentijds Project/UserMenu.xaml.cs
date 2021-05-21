@@ -21,29 +21,34 @@ namespace Tussentijds_Project
     {       
         public UserMenu()
         {            
-            InitializeComponent();            
+            InitializeComponent();
 
-            lblUser.Content = $"User: {ActiveUser.FirstName} {ActiveUser.LastName}";
-            lblRole.Content = $"Role: {ActiveUser.Role}";
-        }
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
+        }        
 
-        private void MyFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void Button_Click_Databeheer(object sender, RoutedEventArgs e)
         {
-
+            if (ActiveUser.Role == "Magazijnier")
+            {
+                DatabeheerMagazijn data = new DatabeheerMagazijn();
+                Hide();
+                data.Show();
+            }
+            else if (ActiveUser.Role == "Verkoper")
+            {
+                DatabeheerKlanten data = new DatabeheerKlanten();
+                Hide();
+                data.Show();
+            }
+            else
+            {
+                DatabeheerAdmin data = new DatabeheerAdmin();
+                Hide();
+                data.Show();
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //Databeheer data = new Databeheer();
-            //Hide();
-            //data.Show();
-
-            DatabeheerAdmin data = new DatabeheerAdmin();
-            Hide();
-            data.Show();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click_Overzicht(object sender, RoutedEventArgs e)
         {
             if (ActiveUser.Role == "Magazijnier")
             {
@@ -53,20 +58,24 @@ namespace Tussentijds_Project
             }
             else if (ActiveUser.Role == "Verkoper")
             {
-
+                DatabeheerKlanten data = new DatabeheerKlanten();
+                Hide();
+                data.Show();
             }
             else
             {
-
+                DatabeheerAdmin data = new DatabeheerAdmin();
+                Hide();
+                data.Show();
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_Bestelling(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
             MainWindow main = new MainWindow();
