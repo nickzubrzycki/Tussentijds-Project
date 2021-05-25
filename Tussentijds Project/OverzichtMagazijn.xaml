@@ -13,7 +13,7 @@
                     <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
                 </DockPanel>
                 <DockPanel>
-                    <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
+                    <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True" SourceUpdated="dgMagazijn_SourceUpdated">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
                             <DataGridTemplateColumn.CellTemplate>
@@ -46,13 +46,51 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel DockPanel.Dock="Right">
-                    <TextBlock TextDecorations="Underline" >Filter op naam:</TextBlock>
+                    <TextBlock TextDecorations="Underline" Margin="5">Filter op naam:</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBox x:Name="txtFilterNaam" Width="150" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5"></TextBox>
                         <Button Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterNaam">OK</Button>
-                    </StackPanel>                    
+                    </StackPanel>
+                    <TextBlock TextDecorations="Underline" Margin="5">Filter op eenheidsprijs:</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtMinPrijs" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                        <Label FontSize="18">≤</Label>
+                        <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterPrijs">OK</Button>
+                        <Label FontSize="18">≤</Label>
+                        <TextBox x:Name="txtMaxPrijs" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                    </StackPanel>
+                    <TextBlock TextDecorations="Underline" Margin="5">Filter op aantal:</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="txtMinStock" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                        <Label FontSize="18">≤</Label>
+                        <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterStock">OK</Button>
+                        <Label FontSize="18">≤</Label>
+                        <TextBox x:Name="txtMaxStock" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                    </StackPanel>
+                    <TextBlock TextDecorations="Underline" Margin="5">Filter op leverancier:</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbSuppliers" Margin="5" Width="200" Height="35">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Name}"></Label>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterSupplier">OK</Button>
+                    </StackPanel>
+                    <Button Margin="5,20" Width="75" Click="Button_Click_Reset">Reset</Button>
+                </StackPanel>                
+            </DockPanel>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label>TOTALE STOCK:</Label>
+                    <TextBlock x:Name="tbAantal"></TextBlock>
                 </StackPanel>
-            </DockPanel>                
+                <StackPanel Orientation="Horizontal">
+                    <Label>TOTALE WAARDE:</Label>
+                    <TextBlock x:Name="tbPrijs"></TextBlock>
+                </StackPanel>
+            </StackPanel>
             </StackPanel>             
     </Grid>
 </Window>
