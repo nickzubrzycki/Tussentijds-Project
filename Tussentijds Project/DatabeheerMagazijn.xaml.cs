@@ -102,7 +102,7 @@ namespace Tussentijds_Project
             if (cbProductsEdit.SelectedItem != null)
             {
                 Product selectedProduct = cbProductsEdit.SelectedItem as Product;
-                Supplier selectedSupplier = cbSuppliersAdd.SelectedItem as Supplier;
+                Supplier selectedSupplier = cbSuppliersProductEdit.SelectedItem as Supplier;
 
                 using (var ctx = new OrderManagerContext())
                 {

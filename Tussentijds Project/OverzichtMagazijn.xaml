@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
         Title="Overzicht Magazijn" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Background="AliceBlue">        
-            <StackPanel>
-                <DockPanel>
-                    <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
-                    <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
-                </DockPanel>
-                <DockPanel>
-                    <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True" SourceUpdated="dgMagazijn_SourceUpdated">
+    <Grid Background="AliceBlue">
+        <StackPanel>
+            <DockPanel>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
+            </DockPanel>
+            <DockPanel>
+                <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
                             <DataGridTemplateColumn.CellTemplate>
@@ -79,18 +79,18 @@
                         <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterSupplier">OK</Button>
                     </StackPanel>
                     <Button Margin="5,20" Width="75" Click="Button_Click_Reset">Reset</Button>
-                </StackPanel>                
+                </StackPanel>
             </DockPanel>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label>TOTALE STOCK:</Label>
-                    <TextBlock x:Name="tbAantal"></TextBlock>
+                    <TextBlock x:Name="tbAantal" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label>TOTALE WAARDE:</Label>
-                    <TextBlock x:Name="tbPrijs"></TextBlock>
+                    <TextBlock x:Name="tbPrijs" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </StackPanel>
-            </StackPanel>             
+        </StackPanel>
     </Grid>
 </Window>

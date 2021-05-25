@@ -75,6 +75,12 @@
     <Compile Include="DatabeheerMagazijn.xaml.cs">
       <DependentUpon>DatabeheerMagazijn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OverzichtAdmin.xaml.cs">
+      <DependentUpon>OverzichtAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OverzichtKlanten.xaml.cs">
+      <DependentUpon>OverzichtKlanten.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OverzichtMagazijn.xaml.cs">
       <DependentUpon>OverzichtMagazijn.xaml</DependentUpon>
     </Compile>
@@ -106,6 +112,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OverzichtAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OverzichtKlanten.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OverzichtMagazijn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

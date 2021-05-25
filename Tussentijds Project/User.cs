@@ -85,7 +85,7 @@ namespace Tussentijds_Project
         [Key]
         public int ProductId { get; set; }
         [MaxLength(100)]
-        public string Name { get; set; }     
+        public string Name { get; set; }  
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
         public Supplier Supplier { get; set; }

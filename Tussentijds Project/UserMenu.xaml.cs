@@ -58,15 +58,13 @@ namespace Tussentijds_Project
             }
             else if (ActiveUser.Role == "Verkoper")
             {
-                DatabeheerKlanten data = new DatabeheerKlanten();
-                Hide();
-                data.Show();
+                
             }
             else
             {
-                DatabeheerAdmin data = new DatabeheerAdmin();
+                OverzichtAdmin admin = new OverzichtAdmin();
                 Hide();
-                data.Show();
+                admin.Show();
             }
         }
 

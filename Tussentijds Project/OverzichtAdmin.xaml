@@ -1,0 +1,102 @@
+﻿<Window x:Class="Tussentijds_Project.OverzichtAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tussentijds_Project"
+        mc:Ignorable="d"
+        Title="Overzicht" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="AliceBlue">
+        <StackPanel>
+            <DockPanel>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
+            </DockPanel>
+            <TabControl>
+                <TabItem Header="Magazijn">
+                    <StackPanel>
+                        <DockPanel>
+                            <DataGrid DockPanel.Dock="Left" x:Name="dgMagazijn" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Name}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Eenheidsprijs" Width="85" CanUserSort="True" SortMemberPath="UnitPrice">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding UnitPrice}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Aantal" Width="85" CanUserSort="True" SortMemberPath="Stock">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Stock}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Leverancier" Width="140" CanUserSort="True" SortMemberPath="Supplier">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Supplier}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel DockPanel.Dock="Right">
+                                <TextBlock TextDecorations="Underline" Margin="5">Filter op naam:</TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="txtFilterNaam" Width="150" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5"></TextBox>
+                                    <Button Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterNaam">OK</Button>
+                                </StackPanel>
+                                <TextBlock TextDecorations="Underline" Margin="5">Filter op eenheidsprijs:</TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="txtMinPrijs" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                                    <Label FontSize="18">≤</Label>
+                                    <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterPrijs">OK</Button>
+                                    <Label FontSize="18">≤</Label>
+                                    <TextBox x:Name="txtMaxPrijs" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                                </StackPanel>
+                                <TextBlock TextDecorations="Underline" Margin="5">Filter op aantal:</TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="txtMinStock" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                                    <Label FontSize="18">≤</Label>
+                                    <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterStock">OK</Button>
+                                    <Label FontSize="18">≤</Label>
+                                    <TextBox x:Name="txtMaxStock" VerticalContentAlignment="Center" Width="35" Margin="5"></TextBox>
+                                </StackPanel>
+                                <TextBlock TextDecorations="Underline" Margin="5">Filter op leverancier:</TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="cbSuppliers" Margin="5" Width="200" Height="35">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Name}"></Label>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Margin="5" Width="50" Height="19" VerticalContentAlignment="Center" Click="Button_Click_FilterSupplier">OK</Button>
+                                </StackPanel>
+                                <Button Margin="5,20" Width="75" Click="Button_Click_Reset">Reset</Button>
+                            </StackPanel>
+                        </DockPanel>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>TOTALE STOCK:</Label>
+                                <TextBlock x:Name="tbAantal" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>TOTALE WAARDE:</Label>
+                                <TextBlock x:Name="tbPrijs" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>                    
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Grid>
+</Window>

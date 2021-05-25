@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 namespace Tussentijds_Project
 {
     /// <summary>
-    /// Interaction logic for OverzichtMagazijn.xaml
+    /// Interaction logic for OverzichtAdmin.xaml
     /// </summary>
-    public partial class OverzichtMagazijn : Window
+    public partial class OverzichtAdmin : Window
     {
-        public OverzichtMagazijn()
+        public OverzichtAdmin()
         {
             InitializeComponent();
 
-            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";            
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
 
             using (var ctx = new OrderManagerContext())
             {
@@ -39,7 +39,7 @@ namespace Tussentijds_Project
                 int stock = 0;
                 double price = 0;
 
-                foreach(var item in collection)
+                foreach (var item in collection)
                 {
                     stock += item.Stock;
                     price += item.Stock * item.UnitPrice;
@@ -49,12 +49,13 @@ namespace Tussentijds_Project
                 tbPrijs.Text = $"€ {price}";
             }
         }
+
         private void Button_Click_Back(object sender, RoutedEventArgs e)
         {
             Close();
             UserMenu menu = new UserMenu();
             menu.Show();
-        }        
+        }
 
         private void Button_Click_FilterNaam(object sender, RoutedEventArgs e)
         {
@@ -95,12 +96,12 @@ namespace Tussentijds_Project
 
                 }
                 else
-                    MessageBox.Show("Gelieve eerst een zoekterm in te vullen.", "", MessageBoxButton.OK, MessageBoxImage.Error);                
+                    MessageBox.Show("Gelieve eerst een zoekterm in te vullen.", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void Button_Click_FilterPrijs(object sender, RoutedEventArgs e)
-        {                        
+        {
             if (string.IsNullOrEmpty(txtMinPrijs.Text))
                 txtMinPrijs.Text = "0";
             if (string.IsNullOrEmpty(txtMaxPrijs.Text))
@@ -145,7 +146,7 @@ namespace Tussentijds_Project
         }
 
         private void Button_Click_FilterStock(object sender, RoutedEventArgs e)
-        {                        
+        {
             if (string.IsNullOrEmpty(txtMinStock.Text))
                 txtMinStock.Text = "0";
             if (string.IsNullOrEmpty(txtMaxStock.Text))
@@ -261,8 +262,7 @@ namespace Tussentijds_Project
             txtMaxPrijs.Text = null;
             txtMinStock.Text = null;
             txtMaxStock.Text = null;
-            cbSuppliers.SelectedItem = null;            
-        }        
-        
+            cbSuppliers.SelectedItem = null;
+        }
     }
 }
