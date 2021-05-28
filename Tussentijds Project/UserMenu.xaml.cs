@@ -70,7 +70,18 @@ namespace Tussentijds_Project
 
         private void Button_Click_Bestelling(object sender, RoutedEventArgs e)
         {
+            if (ActiveUser.Role == "Magazijnier")
+            {
+               
+            }
+            else if (ActiveUser.Role == "Verkoper")
+            {
 
+            }
+            else
+            {
+
+            }
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)

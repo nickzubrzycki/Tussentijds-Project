@@ -76,9 +76,17 @@ namespace Tussentijds_Project
         [Key]
         public int OrderId { get; set; }        
         public Customer Customer { get; set; }        
-        public DateTime OrderDate { get; set; }
-        public ICollection<Product> Products { get; set; }
-    }              
+        public DateTime OrderDate { get; set; }        
+    }
+    
+    public class OrderDetail
+    {
+        [Key]
+        public int OrderDetailId { get; set; }        
+        public Order Order { get; set; }
+        public Product Product { get; set; }
+        public int Quantity { get; set; }        
+    }
     
     public class Product
     {
@@ -88,8 +96,7 @@ namespace Tussentijds_Project
         public string Name { get; set; }  
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
-        public Supplier Supplier { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public Supplier Supplier { get; set; }        
     }
 
     public class Customer
@@ -120,6 +127,7 @@ namespace Tussentijds_Project
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
