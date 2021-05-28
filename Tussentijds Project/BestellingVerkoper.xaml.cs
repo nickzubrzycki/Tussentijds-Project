@@ -22,9 +22,41 @@ namespace Tussentijds_Project
         public BestellingVerkoper()
         {
             InitializeComponent();
+
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
+
+            using (var ctx = new OrderManagerContext())
+            {
+                dgOrders.ItemsSource = ctx.Orders.Join(ctx.Customers,
+                    o => o.Customer.CustomerId,
+                    c => c.CustomerId,
+                    (o, c) => new { ID = o.OrderId, Klant = c.Name, Datum = o.OrderDate }).ToList();
+
+                
+
+                cbCustomers.ItemsSource = ctx.Customers.ToList();
+                cbProducts.ItemsSource = ctx.Products.ToList();
+            }
         }
 
         private void Button_Click_Back(object sender, RoutedEventArgs e)
+        {
+            Close();
+            UserMenu menu = new UserMenu();
+            menu.Show();
+        }
+
+        private void Button_Click_AddProducts(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Add(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_Finish(object sender, RoutedEventArgs e)
         {
 
         }

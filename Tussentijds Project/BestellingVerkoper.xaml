@@ -39,54 +39,38 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>                                    
                                 </DataGrid.Columns>
-                            <DataGrid.RowDetailsTemplate>
-                                <DataTemplate>
-                                    <DataGrid x:Name="dgOrderDetails" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
-                                        <DataGrid.Columns>
-                                            <DataGridTemplateColumn Header="Product">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Label Content="{Binding Name}"></Label>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Header="Aantal">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Label Content="{Binding Quantity}"></Label>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
+                                <DataGrid.RowDetailsTemplate>
+                                    <DataTemplate>
+                                        <DataGrid x:Name="dgOrderDetails" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left">
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn Header="Product">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Aantal">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Quantity}"></Label>
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </DataTemplate>
+                                </DataGrid.RowDetailsTemplate>
                             </DataGrid>                        
                     </StackPanel>
                 </TabItem>
                 <TabItem Header="Nieuwe bestelling">
                     <DockPanel>
-                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                            <StackPanel Orientation="Horizontal" Margin="50,0">
-                                <Label VerticalContentAlignment="Center">Naam klant:</Label>
-                                <ComboBox x:Name="cbCustomers" Margin="5" Width="200" Height="35">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding Name}"></Label>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="50,0">
-                                <Label VerticalContentAlignment="Center">Datum:</Label>
-                                <DatePicker Height="35" Width="200" VerticalContentAlignment="Center"></DatePicker>
-                            </StackPanel>
-                        </StackPanel>
-                        <StackPanel DockPanel.Dock="Left">
-                            <StackPanel Margin="10">
-                                <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label VerticalContentAlignment="Center" Width="55">Product:</Label>
-                                    <ComboBox x:Name="cbProducts" Margin="5" Width="200" Height="35">
+                        <StackPanel DockPanel.Dock="Top">
+                            <StackPanel  Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Margin="50,0">
+                                    <Label VerticalContentAlignment="Center">Naam klant:</Label>
+                                    <ComboBox x:Name="cbCustomers" Margin="5" Width="200" Height="35">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Content="{Binding Name}"></Label>
@@ -94,22 +78,52 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="10">
-                                    <Label Width="55">Aantal:</Label>
-                                    <TextBox Width="50"></TextBox>
+                                <StackPanel Orientation="Horizontal" Margin="50,0">
+                                    <Label VerticalContentAlignment="Center">Datum:</Label>
+                                    <DatePicker Height="35" Width="200" VerticalContentAlignment="Center"></DatePicker>
                                 </StackPanel>
-                                <Button Width="100" HorizontalAlignment="Left" Margin="10">Toevoegen</Button>
                             </StackPanel>
+                            <Button Width="150" Margin="10" Click="Button_Click_AddProducts">Product(en) toevoegen</Button>
                         </StackPanel>
-                        <StackPanel DockPanel.Dock="Right">
-                            <ListView Margin="10">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </StackPanel>
+                        <DockPanel x:Name="dpProducts" DockPanel.Dock="Bottom" Visibility="Hidden">
+                            <Button DockPanel.Dock="Bottom" Width="150" Margin="10" Click="Button_Click_Finish">Finaliseren</Button>
+                            <StackPanel DockPanel.Dock="Left">
+                                <StackPanel Margin="10">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <Label VerticalContentAlignment="Center" Width="55">Product:</Label>
+                                        <ComboBox x:Name="cbProducts" Margin="5" Width="200" Height="35">
+                                            <ComboBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding Name}"></Label>
+                                                </DataTemplate>
+                                            </ComboBox.ItemTemplate>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <Label Width="55" VerticalContentAlignment="Center">Aantal:</Label>
+                                        <TextBox Width="50" Height="25" Margin="5"></TextBox>
+                                    </StackPanel>
+                                    <Button Width="100" HorizontalAlignment="Left" Margin="70,5" Click="Button_Click_Add">Toevoegen</Button>
+                                </StackPanel>
+                            </StackPanel>                            
+                            <StackPanel DockPanel.Dock="Right">
+                                <ListBox x:Name="lbProducts" HorizontalAlignment="Stretch">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,2">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Label x:Name="lblNaam"></Label>
+                                                <Label x:Name="lblAantal"></Label>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </StackPanel>
+                            
+                        </DockPanel>                        
                     </DockPanel>                  
                 </TabItem>
             </TabControl>
