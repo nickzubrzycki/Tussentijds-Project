@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="BestellingVerkoper" Height="450" Width="800">
+        Title="BestellingVerkoper" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
         <StackPanel>
             <DockPanel>
@@ -17,31 +17,52 @@
                     <DockPanel>                        
                         <DataGrid DockPanel.Dock="Left" x:Name="dgOrders" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="ID" Width="85" CanUserSort="True" SortMemberPath="ID">
+                                <DataGridTemplateColumn Header="ID" Width="35" CanUserSort="True" SortMemberPath="ID">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding OrderId}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Klant" Width="200" CanUserSort="True" SortMemberPath="Klant">
+                                <DataGridTemplateColumn Header="Klant" Width="150" CanUserSort="True" SortMemberPath="Klant">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding Name}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Datum" Width="150" CanUserSort="True" SortMemberPath="Datum">
+                                <DataGridTemplateColumn Header="Datum" Width="100" CanUserSort="True" SortMemberPath="Datum">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding OrderDate}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>                                    
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Aantal" Width="55" CanUserSort="True" SortMemberPath="Aantal">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding TotalQuantity}"></Label>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Prijs" Width="75" CanUserSort="True" SortMemberPath="Prijs">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding TotalPrice}"></Label>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>                                
                         </DataGrid>
                         <StackPanel DockPanel.Dock="Right">
                             <Label>Selecteer een order.</Label>
+                            <ComboBox x:Name="cbOrders" Width="100" Height="30" HorizontalAlignment="Left" Margin="5,10">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding OrderId}"></Label>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                             <Button x:Name="btnDetails" Width="100" HorizontalAlignment="Left" Margin="5,10" Click="Button_Click_Details">Toon details</Button>
                             <DataGrid x:Name="dgOrderDetails" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" Margin="5,10">
                                 <DataGrid.Columns>
@@ -56,6 +77,13 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <Label Content="{Binding Quantity}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Prijs" Width="85">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Price}"></Label>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -88,7 +116,7 @@
                             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Width="150" Margin="10" Click="Button_Click_Finish">Bestelling aanmaken</Button>
                                 <Button Width="150" Margin="10" Click="Button_Click_Cancel">Annuleren</Button>
-                            </StackPanel>                          
+                            </StackPanel>                        
 
                             <StackPanel DockPanel.Dock="Left">
                                 <StackPanel Margin="10">

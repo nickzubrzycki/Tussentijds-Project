@@ -27,21 +27,18 @@ namespace Tussentijds_Project
             products = new List<Tuple<Product, int>>();
             lbProducts.ItemsSource = products;
 
-            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";            
-
-            if (dgOrderDetails.SelectedItem == null)
-                btnDetails.IsEnabled = false;
-            else
-                btnDetails.IsEnabled = true;
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";          
+                                     
 
             using (var ctx = new OrderManagerContext())
             {
-                dgOrders.ItemsSource = ctx.Orders.Join(ctx.Customers,
-                    o => o.Customer.CustomerId,
-                    c => c.CustomerId,
-                    (o, c) => new { ID = o.OrderId, Klant = c.Name, Datum = o.OrderDate }).ToList();
+                var tq = ctx.OrderDetails.GroupBy(od => od.Order.OrderId).Select(x => x.Sum(od => od.Quantity));             
                 
+                dgOrders.ItemsSource = ctx.Orders
+                    .Select(o => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate})
+                    .ToList();
 
+                cbOrders.ItemsSource = ctx.Orders.ToList();
                 cbCustomers.ItemsSource = ctx.Customers.ToList();
                 cbProducts.ItemsSource = ctx.Products.ToList();
             }
@@ -72,9 +69,8 @@ namespace Tussentijds_Project
 
                 using (var ctx = new OrderManagerContext())
                 {
-                    Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate };
-                    ctx.Orders.Add(order);
-                    ctx.SaveChanges();
+                    Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate, };
+                    ctx.Orders.Add(order);                    
 
                     foreach (var item in products)
                     {
@@ -101,11 +97,14 @@ namespace Tussentijds_Project
 
         private void Button_Click_Details(object sender, RoutedEventArgs e)
         {
-            Order selected = dgOrders.SelectedItem as Order;
+            Order selected = cbOrders.SelectedItem as Order;           
 
             using (var ctx = new OrderManagerContext())
             {
-                dgOrderDetails.ItemsSource = ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId).ToList();
+                dgOrderDetails.ItemsSource = ctx.OrderDetails 
+                    .Where(od => od.Order.OrderId == selected.OrderId)
+                    .Select(od => new {Name = od.Product.Name, Quantity = od.Quantity, Price = od.Product.UnitPrice * od.Quantity})
+                    .ToList();
             }
         }
 
