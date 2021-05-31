@@ -76,7 +76,9 @@ namespace Tussentijds_Project
             }
             else if (ActiveUser.Role == "Verkoper")
             {
-
+                BestellingVerkoper bestelling = new BestellingVerkoper();
+                Hide();
+                bestelling.Show();
             }
             else
             {
