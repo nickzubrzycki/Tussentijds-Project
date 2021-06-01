@@ -24,7 +24,7 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Klant" Width="150" CanUserSort="True" SortMemberPath="Klant">
+                                <DataGridTemplateColumn Header="Klant" Width="120" CanUserSort="True" SortMemberPath="Klant">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding Name}"></Label>
@@ -41,14 +41,14 @@
                                 <DataGridTemplateColumn Header="Aantal" Width="55" CanUserSort="True" SortMemberPath="Aantal">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding TotalQuantity}"></Label>
+                                            <Label Content="{Binding TotalQ}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <DataGridTemplateColumn Header="Prijs" Width="75" CanUserSort="True" SortMemberPath="Prijs">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label Content="{Binding TotalPrice}"></Label>
+                                            <Label Content="{Binding TotalP}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -80,10 +80,17 @@
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Prijs" Width="85">
+                                    <DataGridTemplateColumn Header="Prijs/stuk" Width="85">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Label Content="{Binding Price}"></Label>
+                                                <Label Content="{Binding UnitPrice, StringFormat={}{0:n2}}"></Label>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Totaal" Width="85">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Total}"></Label>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

@@ -24,19 +24,24 @@ namespace Tussentijds_Project
         {
             InitializeComponent();
 
-            products = new List<Tuple<Product, int>>();
-            lbProducts.ItemsSource = products;
+            products = new List<Tuple<Product, int>>();            
 
-            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";          
-                                     
-
+            lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";    
+                                   
             using (var ctx = new OrderManagerContext())
             {
-                var tq = ctx.OrderDetails.GroupBy(od => od.Order.OrderId).Select(x => x.Sum(od => od.Quantity));             
-                
-                dgOrders.ItemsSource = ctx.Orders
-                    .Select(o => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate})
-                    .ToList();
+
+                var collection = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (sc, p) => new { sc, p })
+                    .GroupBy(c => c.sc.Order.OrderId);
+
+                dgOrders.ItemsSource = ctx.Orders.Join(collection,
+                    o => o.OrderId,
+                    c => c.Key,
+                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.sc.Quantity), TotalP = c.Sum(s => s.sc.Product.UnitPrice * s.sc.Quantity) })
+                    .ToList();                    
 
                 cbOrders.ItemsSource = ctx.Orders.ToList();
                 cbCustomers.ItemsSource = ctx.Customers.ToList();
@@ -55,7 +60,7 @@ namespace Tussentijds_Project
         {
             Product selected = cbProducts.SelectedItem as Product;
 
-            products.Add(new Tuple<Product,int>(selected, Convert.ToInt32(txtAantal.Text)));
+            lbProducts.Items.Add(new Tuple<Product,int>(selected, Convert.ToInt32(txtAantal.Text)));
 
             cbProducts.SelectedItem = null;
             txtAantal.Clear();
@@ -72,7 +77,7 @@ namespace Tussentijds_Project
                     Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate, };
                     ctx.Orders.Add(order);                    
 
-                    foreach (var item in products)
+                    foreach (var item in lbProducts.Items)
                     {
                         ctx.OrderDetails.Add(new OrderDetail { Order = ctx.Orders.FirstOrDefault(o => o.OrderId == order.OrderId), Product = ctx.Products.FirstOrDefault(p => p.ProductId == item.Item1.ProductId), Quantity = item.Item2 });
                     }
@@ -103,7 +108,7 @@ namespace Tussentijds_Project
             {
                 dgOrderDetails.ItemsSource = ctx.OrderDetails 
                     .Where(od => od.Order.OrderId == selected.OrderId)
-                    .Select(od => new {Name = od.Product.Name, Quantity = od.Quantity, Price = od.Product.UnitPrice * od.Quantity})
+                    .Select(od => new {Name = od.Product.Name, Quantity = od.Quantity, UnitPrice = od.Product.UnitPrice, Total = od.Product.UnitPrice * od.Quantity})
                     .ToList();
             }
         }
