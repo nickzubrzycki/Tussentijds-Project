@@ -76,7 +76,8 @@ namespace Tussentijds_Project
         [Key]
         public int OrderId { get; set; }        
         public Customer Customer { get; set; }        
-        public DateTime OrderDate { get; set; }        
+        public DateTime OrderDate { get; set; }
+        public ICollection<OrderDetail> OrderDetail { get; set; }
     }
     
     public class OrderDetail
@@ -96,7 +97,11 @@ namespace Tussentijds_Project
         public string Name { get; set; }  
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
-        public Supplier Supplier { get; set; }        
+        public Supplier Supplier { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     public class Customer

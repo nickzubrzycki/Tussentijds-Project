@@ -19,18 +19,15 @@ namespace Tussentijds_Project
     /// </summary>
     public partial class BestellingVerkoper : Window
     {
-        public List<Tuple<Product,int>> products { get; set; }
+       
         public BestellingVerkoper()
         {
-            InitializeComponent();
-
-            products = new List<Tuple<Product, int>>();            
+            InitializeComponent();                        
 
             lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";    
                                    
             using (var ctx = new OrderManagerContext())
             {
-
                 var collection = ctx.OrderDetails.Join(ctx.Products,
                     od => od.Product.ProductId,
                     p => p.ProductId,
@@ -59,7 +56,7 @@ namespace Tussentijds_Project
         private void Button_Click_Add(object sender, RoutedEventArgs e)
         {
             Product selected = cbProducts.SelectedItem as Product;
-
+            
             lbProducts.Items.Add(new Tuple<Product,int>(selected, Convert.ToInt32(txtAantal.Text)));
 
             cbProducts.SelectedItem = null;
@@ -68,32 +65,52 @@ namespace Tussentijds_Project
 
         private void Button_Click_Finish(object sender, RoutedEventArgs e)
         {
-            if (cbCustomers.SelectedItem != null && dpOrder.SelectedDate != null && products != null)
+            if (cbCustomers.SelectedItem != null && dpOrder.SelectedDate != null && lbProducts.Items != null)
             {
                 Customer selected = cbCustomers.SelectedItem as Customer;
 
+                Order order = new Order { Customer = selected, OrderDate = (DateTime)dpOrder.SelectedDate };
+
+                foreach (Tuple<Product, int> item in lbProducts.Items)
+                {
+                    OrderDetail detail = new OrderDetail { Product = item.Item1, Quantity = item.Item2 };
+                    order.OrderDetail.Add(detail);
+                }
+
                 using (var ctx = new OrderManagerContext())
                 {
-                    Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate, };
-                    ctx.Orders.Add(order);                    
+                    //Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate };
 
-                    foreach (var item in lbProducts.Items)
-                    {
-                        ctx.OrderDetails.Add(new OrderDetail { Order = ctx.Orders.FirstOrDefault(o => o.OrderId == order.OrderId), Product = ctx.Products.FirstOrDefault(p => p.ProductId == item.Item1.ProductId), Quantity = item.Item2 });
-                    }
+                    //foreach (Tuple<Product, int> item in lbProducts.Items)
+                    //{
+                    //    OrderDetail detail = new OrderDetail { Product = ctx.Products.FirstOrDefault(p => p.ProductId == item.Item1.ProductId), Quantity = item.Item2 };
+                    //    order.OrderDetails.Add(detail);
+                    //    ctx.OrderDetails.Add(detail);
+                    //}
+                    ctx.Orders.Add(order);
                     ctx.SaveChanges();
 
                     dgOrders.ItemsSource = null;
-                    dgOrders.ItemsSource = ctx.Orders.Join(ctx.Customers,
-                        o => o.Customer.CustomerId,
-                        c => c.CustomerId,
-                        (o, c) => new { ID = o.OrderId, Klant = c.Name, Datum = o.OrderDate }).ToList();
+
+                    var collection = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (sc, p) => new { sc, p })
+                    .GroupBy(c => c.sc.Order.OrderId);
+
+                    dgOrders.ItemsSource = ctx.Orders.Join(collection,
+                        o => o.OrderId,
+                        c => c.Key,
+                        (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.sc.Quantity), TotalP = c.Sum(s => s.sc.Product.UnitPrice * s.sc.Quantity) })
+                        .ToList();
+
+                    cbOrders.ItemsSource = ctx.Orders.ToList();
                 }
                 MessageBox.Show("bestelling werd aangemaakt.", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 cbCustomers.SelectedItem = null;
                 dpOrder.SelectedDate = null;
-                products = null;
-                products = new List<Tuple<Product, int>>();
+                lbProducts.Items.Clear();
+                
             }
             else
                 MessageBox.Show("bestelling aanmaken mislukt!\nNiet alle velden werden ingevuld.", "", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -119,8 +136,8 @@ namespace Tussentijds_Project
             dpOrder.SelectedDate = null;
             cbProducts.SelectedItem = null;
             txtAantal.Clear();
-            products = null;
-            products = new List<Tuple<Product, int>>();
-        }
+            lbProducts.Items.Clear();
+        }        
+
     }
 }
