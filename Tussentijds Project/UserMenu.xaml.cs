@@ -24,6 +24,7 @@ namespace Tussentijds_Project
             InitializeComponent();
 
             lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
+            
         }        
 
         private void Button_Click_Databeheer(object sender, RoutedEventArgs e)

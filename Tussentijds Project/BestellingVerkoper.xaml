@@ -105,7 +105,7 @@
                             <StackPanel  Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal" Margin="50,0">
                                     <Label VerticalContentAlignment="Center">Naam klant:</Label>
-                                    <ComboBox x:Name="cbCustomers" Margin="5" Width="200" Height="35">
+                                    <ComboBox x:Name="cbCustomersAdd" Margin="5" Width="200" Height="35">
                                         <ComboBox.ItemTemplate>
                                             <DataTemplate>
                                                 <Label Content="{Binding Name}"></Label>
@@ -115,47 +115,118 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Margin="50,0">
                                     <Label VerticalContentAlignment="Center">Datum:</Label>
-                                    <DatePicker x:Name="dpOrder" Height="35" Width="200" VerticalContentAlignment="Center"></DatePicker>
+                                    <DatePicker x:Name="dpOrderAdd" Height="35" Width="200" VerticalContentAlignment="Center"></DatePicker>
                                 </StackPanel>
                             </StackPanel>                            
                         </StackPanel>
-                        <DockPanel x:Name="dpProducts" DockPanel.Dock="Bottom" Visibility="Visible">
+                        <DockPanel DockPanel.Dock="Bottom">
                             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Width="150" Margin="10" Click="Button_Click_Finish">Bestelling aanmaken</Button>
                                 <Button Width="150" Margin="10" Click="Button_Click_Cancel">Annuleren</Button>
-                            </StackPanel>                        
-
-                            <StackPanel DockPanel.Dock="Left">
-                                <StackPanel Margin="10">
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <Label VerticalContentAlignment="Center" Width="55">Product:</Label>
-                                        <ComboBox x:Name="cbProducts" Margin="5" Width="200" Height="35">
-                                            <ComboBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Label Content="{Binding Name}"></Label>
-                                                </DataTemplate>
-                                            </ComboBox.ItemTemplate>
-                                        </ComboBox>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <Label Width="55" VerticalContentAlignment="Center">Aantal:</Label>
-                                        <TextBox x:Name="txtAantal"  Width="50" Height="25" Margin="5" VerticalContentAlignment="Center"></TextBox>
-                                    </StackPanel>
-                                    <Button Width="100" HorizontalAlignment="Left" Margin="70,5" Click="Button_Click_Add">Toevoegen</Button>
-                                </StackPanel>
-                            </StackPanel>                            
-                            <StackPanel DockPanel.Dock="Right">
-                                <ListBox x:Name="lbProducts" HorizontalAlignment="Stretch" Width="300" Margin="20">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Label Content="{Binding}"></Label>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
                             </StackPanel>
-                            
+                            <GroupBox Header="Detail">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel DockPanel.Dock="Left">
+                                        <StackPanel Margin="10">
+                                            <StackPanel Orientation="Horizontal" Margin="10">
+                                                <Label VerticalContentAlignment="Center" Width="55">Product:</Label>
+                                                <ComboBox x:Name="cbProductsAdd" Margin="5" Width="200" Height="35">
+                                                    <ComboBox.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Label Content="{Binding Name}"></Label>
+                                                        </DataTemplate>
+                                                    </ComboBox.ItemTemplate>
+                                                </ComboBox>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="10">
+                                                <Label Width="55" VerticalContentAlignment="Center">Aantal:</Label>
+                                                <TextBox x:Name="txtAantalAdd"  Width="50" Height="25" Margin="5" VerticalContentAlignment="Center"></TextBox>
+                                            </StackPanel>
+                                            <Button Width="100" HorizontalAlignment="Left" Margin="70,5" Click="Button_Click_Add">Toevoegen</Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel DockPanel.Dock="Right">
+                                        <ListBox x:Name="lbProductsAdd" HorizontalAlignment="Stretch" Width="300" Margin="20">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Label Content="{Binding}"></Label>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>                            
                         </DockPanel>                        
                     </DockPanel>                  
+                </TabItem>
+                <TabItem Header="Bestelling wijzigen">
+                    <StackPanel>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                            <Label VerticalContentAlignment="Center">Selecteer een order:</Label>
+                            <ComboBox x:Name="cbOrdersEdit" Width="100" Height="30" HorizontalAlignment="Left" Margin="5,10" SelectionChanged="cbOrdersEdit_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding OrderId}"></Label>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel  Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" Margin="50,0">
+                                <Label VerticalContentAlignment="Center">Naam klant:</Label>
+                                <ComboBox x:Name="cbCustomersEdit" Margin="5" Width="200" Height="35">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding Name}"></Label>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="50,0">
+                                <Label VerticalContentAlignment="Center">Datum:</Label>
+                                <DatePicker x:Name="dpOrderEdit" Height="35" Width="200" VerticalContentAlignment="Center"></DatePicker>
+                            </StackPanel>
+                        </StackPanel>
+                        <GroupBox Header="Detail">
+                            <DockPanel>
+                                <StackPanel DockPanel.Dock="Left">
+                                    <StackPanel Margin="10">
+                                        <StackPanel Orientation="Horizontal" Margin="10">
+                                            <Label VerticalContentAlignment="Center" Width="55">Product:</Label>
+                                            <ComboBox x:Name="cbProductsEdit" Margin="5" Width="200" Height="35">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Label Content="{Binding Name}"></Label>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="10">
+                                            <Label Width="55" VerticalContentAlignment="Center">Aantal:</Label>
+                                            <TextBox x:Name="txtAantalEdit"  Width="50" Height="25" Margin="5" VerticalContentAlignment="Center"></TextBox>
+                                        </StackPanel>
+                                        <Button Width="100" HorizontalAlignment="Left" Margin="70,5" Click="Button_Click_Edit">Bewerken</Button>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel DockPanel.Dock="Right">
+                                    <ListBox x:Name="lbProductsEdit" HorizontalAlignment="Stretch" Width="300" Margin="20" SelectionChanged="lbProductsEdit_SelectionChanged">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                    <TextBlock Text="{Binding Product}" Margin="2"/>
+                                                    <TextBlock Text="{Binding Quantity}" Margin="2"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </StackPanel>
+                            </DockPanel>
+                        </GroupBox>
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Width="150" Margin="10" Click="Button_Click_Save">Wijzigen opslaan</Button>
+                            <Button Width="150" Margin="10" Click="Button_Click_CancelEdit">Annuleren</Button>
+                        </StackPanel>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
         </StackPanel>

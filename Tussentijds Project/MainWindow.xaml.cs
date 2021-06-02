@@ -37,7 +37,7 @@ namespace Tussentijds_Project
                 var user = ctx.Users.Include(nameof(Role)).FirstOrDefault(u => u.Username == txtUsername.Text);
 
                 if (user == null)
-                    MessageBox.Show("Ongeldige username");
+                    MessageBox.Show("Ongeldige username", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                 {
                     if (user.Password == User.Encryption(txtPassword.Password))
@@ -52,7 +52,7 @@ namespace Tussentijds_Project
                         menu.Show();
                     }
                     else
-                        MessageBox.Show("Ongeldig password");
+                        MessageBox.Show("Ongeldig password", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
