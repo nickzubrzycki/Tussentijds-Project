@@ -77,7 +77,7 @@ namespace Tussentijds_Project
         public int OrderId { get; set; }        
         public Customer Customer { get; set; }        
         public DateTime OrderDate { get; set; }
-        public ICollection<OrderDetail> OrderDetail { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
     }
     
     public class OrderDetail
@@ -126,7 +126,7 @@ namespace Tussentijds_Project
     {
         public OrderManagerContext() : base("name=OrderManagerDBConnectString")
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<OrderManagerContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<OrderManagerContext>());            
         }
 
         public DbSet<User> Users { get; set; }

@@ -69,24 +69,24 @@ namespace Tussentijds_Project
             {
                 Customer selected = cbCustomers.SelectedItem as Customer;
 
-                Order order = new Order { Customer = selected, OrderDate = (DateTime)dpOrder.SelectedDate };
+                //Order order = new Order { Customer = selected, OrderDate = (DateTime)dpOrder.SelectedDate };
 
-                foreach (Tuple<Product, int> item in lbProducts.Items)
-                {
-                    OrderDetail detail = new OrderDetail { Product = item.Item1, Quantity = item.Item2 };
-                    order.OrderDetail.Add(detail);
-                }
+                //foreach (Tuple<Product, int> item in lbProducts.Items)
+                //{
+                //    OrderDetail detail = new OrderDetail { Order = order, Product = item.Item1, Quantity = item.Item2 };
+                //    order.OrderDetail.Add(detail);
+                //}
 
                 using (var ctx = new OrderManagerContext())
                 {
-                    //Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate };
+                    Order order = new Order { Customer = ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId), OrderDate = (DateTime)dpOrder.SelectedDate, OrderDetails = new List<OrderDetail>() };
+                    
 
-                    //foreach (Tuple<Product, int> item in lbProducts.Items)
-                    //{
-                    //    OrderDetail detail = new OrderDetail { Product = ctx.Products.FirstOrDefault(p => p.ProductId == item.Item1.ProductId), Quantity = item.Item2 };
-                    //    order.OrderDetails.Add(detail);
-                    //    ctx.OrderDetails.Add(detail);
-                    //}
+                    foreach (Tuple<Product, int> item in lbProducts.Items)
+                    {
+                        OrderDetail detail = new OrderDetail { Product = ctx.Products.FirstOrDefault(p => p.ProductId == item.Item1.ProductId), Quantity = item.Item2 };
+                        order.OrderDetails.Add(detail);                        
+                    }
                     ctx.Orders.Add(order);
                     ctx.SaveChanges();
 

@@ -17,35 +17,35 @@
                     <DockPanel>                        
                         <DataGrid DockPanel.Dock="Left" x:Name="dgOrders" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="ID" Width="35" CanUserSort="True" SortMemberPath="ID">
+                                <DataGridTemplateColumn Header="ID" Width="35" CanUserSort="True" SortMemberPath="OrderId">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding OrderId}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Klant" Width="120" CanUserSort="True" SortMemberPath="Klant">
+                                <DataGridTemplateColumn Header="Klant" Width="120" CanUserSort="True" SortMemberPath="Name">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding Name}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Datum" Width="100" CanUserSort="True" SortMemberPath="Datum">
+                                <DataGridTemplateColumn Header="Datum" Width="100" CanUserSort="True" SortMemberPath="OrderDate">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding OrderDate}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Aantal" Width="55" CanUserSort="True" SortMemberPath="Aantal">
+                                <DataGridTemplateColumn Header="Aantal" Width="55" CanUserSort="True" SortMemberPath="TotalQ">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding TotalQ}"></Label>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Prijs" Width="75" CanUserSort="True" SortMemberPath="Prijs">
+                                <DataGridTemplateColumn Header="Prijs" Width="75" CanUserSort="True" SortMemberPath="TotalP">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding TotalP}"></Label>
@@ -145,7 +145,7 @@
                                 </StackPanel>
                             </StackPanel>                            
                             <StackPanel DockPanel.Dock="Right">
-                                <ListBox x:Name="lbProducts" HorizontalAlignment="Stretch" Width="300">
+                                <ListBox x:Name="lbProducts" HorizontalAlignment="Stretch" Width="300" Margin="20">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <Label Content="{Binding}"></Label>
