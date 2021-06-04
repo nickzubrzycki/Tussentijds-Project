@@ -56,14 +56,18 @@
                         </DataGrid>
                         <StackPanel DockPanel.Dock="Right">
                             <Label>Selecteer een order.</Label>
-                            <ComboBox x:Name="cbOrders" Width="100" Height="30" HorizontalAlignment="Left" Margin="5,10">
+                            <ComboBox x:Name="cbOrders" SelectedValue="{Binding myVar}" Width="100" Height="30" HorizontalAlignment="Left" Margin="5,10">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <Label Content="{Binding OrderId}"></Label>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <Button x:Name="btnDetails" Width="100" HorizontalAlignment="Left" Margin="5,10" Click="Button_Click_Details">Toon details</Button>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="btnDetails" Width="100" HorizontalAlignment="Left" Margin="5,10" Click="Button_Click_Details">Toon details</Button>
+                                <Button Width="100" Margin="5,10" Click="Button_Click_Delete">Verwijderen</Button>
+                                <Button Width="100" Margin="5,10" Click="Button_Click_Invoice">Factuur</Button>
+                            </StackPanel>                            
                             <DataGrid x:Name="dgOrderDetails" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" Margin="5,10">
                                 <DataGrid.Columns>
                                     <DataGridTemplateColumn Header="Product" Width="100">
@@ -213,8 +217,11 @@
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                                    <TextBlock Text="{Binding Product}" Margin="2"/>
-                                                    <TextBlock Text="{Binding Quantity}" Margin="2"/>
+                                                    <TextBlock Text="(" Margin="2"/>
+                                                    <TextBlock Text="{Binding Product}" Margin="0,2"/>
+                                                    <TextBlock Text="," Margin="0,2,2,0"/>
+                                                    <TextBlock Text="{Binding Quantity}" Margin="0,2"/>
+                                                    <TextBlock Text=")" Margin="0,2"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
@@ -227,7 +234,7 @@
                             <Button Width="150" Margin="10" Click="Button_Click_CancelEdit">Annuleren</Button>
                         </StackPanel>
                     </StackPanel>
-                </TabItem>
+                </TabItem>                
             </TabControl>
         </StackPanel>
     </Grid>

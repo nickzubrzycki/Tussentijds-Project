@@ -78,6 +78,10 @@
     <Compile Include="DatabeheerMagazijn.xaml.cs">
       <DependentUpon>DatabeheerMagazijn.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Invoice.xaml.cs">
+      <DependentUpon>Invoice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyData.cs" />
     <Compile Include="OverzichtAdmin.xaml.cs">
       <DependentUpon>OverzichtAdmin.xaml</DependentUpon>
     </Compile>
@@ -104,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DatabeheerMagazijn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Invoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

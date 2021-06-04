@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using Telerik.Windows.Documents.Flow.FormatProviders.Docx;
+using Telerik.Windows.Documents.Flow.Model;
+using Telerik.Windows.Documents.Flow.Model.Editing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,11 +45,13 @@ namespace Tussentijds_Project
                     .ToList();                    
 
                 cbOrders.ItemsSource = ctx.Orders.ToList();
+                AllData.myData = new MyData();
+                DataContext = AllData.myData;
                 cbCustomersAdd.ItemsSource = ctx.Customers.ToList();
                 cbProductsAdd.ItemsSource = ctx.Products.ToList();
-                cbOrdersEdit.ItemsSource = ctx.Orders.ToList();
-                cbCustomersEdit.ItemsSource = ctx.Customers.ToList();
-                cbProductsEdit.ItemsSource = ctx.Products.ToList();
+                //cbOrdersEdit.ItemsSource = ctx.Orders.ToList();
+                //cbCustomersEdit.ItemsSource = ctx.Customers.ToList();
+                //cbProductsEdit.ItemsSource = ctx.Products.ToList();
             }
         }
 
@@ -124,15 +130,21 @@ namespace Tussentijds_Project
 
         private void Button_Click_Details(object sender, RoutedEventArgs e)
         {
-            Order selected = cbOrders.SelectedItem as Order;           
-
-            using (var ctx = new OrderManagerContext())
+            if (cbOrders.SelectedItem != null)
             {
-                dgOrderDetails.ItemsSource = ctx.OrderDetails 
-                    .Where(od => od.Order.OrderId == selected.OrderId)
-                    .Select(od => new {Name = od.Product.Name, Quantity = od.Quantity, UnitPrice = od.Product.UnitPrice, Total = od.Product.UnitPrice * od.Quantity})
-                    .ToList();
+                Order selected = cbOrders.SelectedItem as Order;
+
+                using (var ctx = new OrderManagerContext())
+                {
+                    dgOrderDetails.ItemsSource = ctx.OrderDetails
+                        .Where(od => od.Order.OrderId == selected.OrderId)
+                        .Select(od => new { Name = od.Product.Name, Quantity = od.Quantity, UnitPrice = od.Product.UnitPrice, Total = od.Product.UnitPrice * od.Quantity })
+                        .ToList();
+                }
             }
+            else
+                MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+            
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
@@ -146,29 +158,29 @@ namespace Tussentijds_Project
 
         private void cbOrdersEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Order selected = cbOrdersEdit.SelectedItem as Order;
+            //Order selected = cbOrdersEdit.SelectedItem as Order;
 
-            if (cbOrdersEdit.SelectedItem != null)
-            {
-                using (var ctx = new OrderManagerContext())
-                {
-                    cbCustomersEdit.SelectedItem = selected.Customer;
-                    dpOrderEdit.SelectedDate = selected.OrderDate;
-                    lbProductsEdit.ItemsSource = ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId).Select(od => new { od.Product, od.Quantity }).ToList();
-                }
+            //if (cbOrdersEdit.SelectedItem != null)
+            //{
+            //    using (var ctx = new OrderManagerContext())
+            //    {
+            //        cbCustomersEdit.SelectedItem = selected.Customer;
+            //        dpOrderEdit.SelectedDate = selected.OrderDate;                    
+            //        lbProductsEdit.ItemsSource = ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId).Select(od => new { od.Product, od.Quantity }).ToList(); 
+            //    }
 
-            }
+            //}
         }
 
         private void lbProductsEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Tuple<Product, int> selected = lbProductsEdit.SelectedItem as Tuple<Product, int>;
+        {            
+            //Tuple<Product, int> selected = lbProductsEdit.SelectedItem as Tuple<Product, int>;
 
-            if (selected != null)
-            {
-                cbProductsEdit.SelectedItem = selected.Item1;
-                txtAantalEdit.Text = selected.Item2.ToString();
-            }
+            //if (selected != null)
+            //{
+            //    cbProductsEdit.SelectedItem = selected.Item1;
+            //    txtAantalEdit.Text = selected.Item2.ToString();
+            //}
 
         }
 
@@ -190,6 +202,56 @@ namespace Tussentijds_Project
             cbProductsEdit.SelectedItem = null;
             txtAantalEdit.Clear();
             lbProductsEdit.ItemsSource = null;
-        }        
+        }
+
+        private void Button_Click_Delete(object sender, RoutedEventArgs e)
+        {
+            if (cbOrders.SelectedItem != null)
+            {
+                Order selected = cbOrders.SelectedItem as Order;
+
+                using (var ctx = new OrderManagerContext())
+                {
+                    ctx.Orders.Remove(ctx.Orders.FirstOrDefault(o => o.OrderId == selected.OrderId));
+                    ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId));
+
+                    foreach (OrderDetail item in selected.OrderDetails)
+                    {
+                        ctx.Products.FirstOrDefault(p => p.ProductId == item.Product.ProductId).Stock = item.Product.Stock + item.Quantity;
+                    }
+
+                    ctx.SaveChanges();
+
+                    var collection = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (sc, p) => new { sc, p })
+                    .GroupBy(c => c.sc.Order.OrderId);
+
+                    dgOrders.ItemsSource = ctx.Orders.Join(collection,
+                        o => o.OrderId,
+                        c => c.Key,
+                        (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.sc.Quantity), TotalP = c.Sum(s => s.sc.Product.UnitPrice * s.sc.Quantity) })
+                        .ToList();
+
+                    cbOrders.ItemsSource = ctx.Orders.ToList();
+                }
+                MessageBox.Show("De bestelling werd verwijderd.", "", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+                MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Button_Click_Invoice(object sender, RoutedEventArgs e)
+        {
+            if (cbOrders.SelectedItem != null)
+            {
+                Order selected = cbOrders.SelectedItem as Order;
+
+                radflow
+            }
+            else
+                MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }
