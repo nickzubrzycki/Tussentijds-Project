@@ -1,8 +1,4 @@
 ﻿using System;
-using System.IO;
-using Telerik.Windows.Documents.Flow.FormatProviders.Docx;
-using Telerik.Windows.Documents.Flow.Model;
-using Telerik.Windows.Documents.Flow.Model.Editing;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,13 +16,14 @@ namespace Tussentijds_Project
 {
     /// <summary>
     /// Interaction logic for BestellingVerkoper.xaml
-    /// </summary>
+    /// </summary>    
     public partial class BestellingVerkoper : Window
     {
-       
+
+        
         public BestellingVerkoper()
         {
-            InitializeComponent();                        
+            InitializeComponent();            
 
             lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";    
                                    
@@ -44,9 +41,7 @@ namespace Tussentijds_Project
                     (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.sc.Quantity), TotalP = c.Sum(s => s.sc.Product.UnitPrice * s.sc.Quantity) })
                     .ToList();                    
 
-                cbOrders.ItemsSource = ctx.Orders.ToList();
-                AllData.myData = new MyData();
-                DataContext = AllData.myData;
+                cbOrders.ItemsSource = ctx.Orders.ToList();               
                 cbCustomersAdd.ItemsSource = ctx.Customers.ToList();
                 cbProductsAdd.ItemsSource = ctx.Products.ToList();
                 //cbOrdersEdit.ItemsSource = ctx.Orders.ToList();
@@ -245,10 +240,11 @@ namespace Tussentijds_Project
         private void Button_Click_Invoice(object sender, RoutedEventArgs e)
         {
             if (cbOrders.SelectedItem != null)
-            {
-                Order selected = cbOrders.SelectedItem as Order;
+            {                
+                Invoice invoice = new Invoice();                
+                invoice.Show();
 
-                radflow
+                
             }
             else
                 MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);

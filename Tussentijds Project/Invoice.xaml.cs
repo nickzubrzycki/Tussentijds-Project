@@ -16,14 +16,24 @@ namespace Tussentijds_Project
 {
     /// <summary>
     /// Interaction logic for Invoice.xaml
-    /// </summary>
+    /// </summary>    
     public partial class Invoice : Window
-    {
+    {        
         public Invoice()
         {
             InitializeComponent();
 
-            DataContext = AllData.myData;
+            
+
+            
+
+            using (var ctx = new OrderManagerContext())
+            {
+                dgInvoice.ItemsSource = ctx.OrderDetails
+                    .Where(od => od.Order.OrderId ==
+            }
+
+            
         }
     }
 }
