@@ -83,11 +83,11 @@
             </DockPanel>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label>TOTALE STOCK:</Label>
+                    <Label Width="105" HorizontalContentAlignment="Right">TOTALE STOCK:</Label>
                     <TextBlock x:Name="tbAantal" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label>TOTALE WAARDE:</Label>
+                    <Label Width="105" HorizontalContentAlignment="Right">TOTALE WAARDE:</Label>
                     <TextBlock x:Name="tbPrijs" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
             </StackPanel>

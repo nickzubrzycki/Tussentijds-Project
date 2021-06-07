@@ -59,7 +59,9 @@ namespace Tussentijds_Project
             }
             else if (ActiveUser.Role == "Verkoper")
             {
-                
+                OverzichtKlanten klanten = new OverzichtKlanten();
+                Hide();
+                klanten.Show();
             }
             else
             {
@@ -83,7 +85,9 @@ namespace Tussentijds_Project
             }
             else
             {
-
+                BestellingVerkoper bestelling = new BestellingVerkoper();
+                Hide();
+                bestelling.Show();
             }
         }
 

@@ -27,11 +27,7 @@ namespace Tussentijds_Project
 
             
 
-            using (var ctx = new OrderManagerContext())
-            {
-                dgInvoice.ItemsSource = ctx.OrderDetails
-                    .Where(od => od.Order.OrderId ==
-            }
+            
 
             
         }

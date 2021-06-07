@@ -5,8 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
-        Title="OverzichtKlanten" Height="450" Width="800">
+        Title="Overzicht Klanten" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
-        
+        <StackPanel>
+            <DockPanel>
+                <Label x:Name="lblUser" DockPanel.Dock="Left" FontStyle="Italic" VerticalContentAlignment="Center"></Label>
+                <Button DockPanel.Dock="Right" Width="100" Height="20" HorizontalAlignment="Right" Margin="10,3" Click="Button_Click_Back">Terug</Button>
+            </DockPanel>
+            <DockPanel>
+                <Grid>
+                    <DataGrid DockPanel.Dock="Left" x:Name="dgKlanten" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Name}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Adres" Width="85" CanUserSort="True" SortMemberPath="Address">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Address}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Afzet" Width="100" CanUserSort="True" SortMemberPath="Sales">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Sales}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Omzet" Width="100" CanUserSort="True" SortMemberPath="Revenue">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Revenue}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid DockPanel.Dock="Left" x:Name="dgVerkocht" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True" Visibility="Hidden">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Naam" Width="140" CanUserSort="True" SortMemberPath="Name">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Name}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Eenheidsprijs" Width="85" CanUserSort="True" SortMemberPath="UnitPrice">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding UnitPrice}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="# Verkocht" Width="100" CanUserSort="True" SortMemberPath="Stock">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Stock}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Leverancier" Width="100" CanUserSort="True" SortMemberPath="Supplier">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding Supplier}"></Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>                
+                <StackPanel DockPanel.Dock="Right" HorizontalAlignment="Left">
+                    <Button x:Name="btnCustomers" Width="100" Height="30" Margin="10" IsEnabled="False" Click="btnCustomers_Click">Klanten</Button>
+                    <Button x:Name="btnProducts" Width="100" Height="30" Margin="10" Click="btnProducts_Click">Producten</Button>
+                </StackPanel>
+            </DockPanel>
+            <StackPanel>                
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="95" HorizontalContentAlignment="Right">TOTALE AFZET:</Label>
+                    <TextBlock x:Name="tbAfzet" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Width="95" HorizontalContentAlignment="Right">TOTALE OMZET:</Label>
+                    <TextBlock x:Name="tbOmzet" VerticalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

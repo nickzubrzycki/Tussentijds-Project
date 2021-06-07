@@ -45,7 +45,7 @@ namespace Tussentijds_Project
                     price += item.Stock * item.UnitPrice;
                 }
 
-                tbAantal.Text = stock.ToString();
+                tbAantal.Text = $"{stock} stuks";
                 tbPrijs.Text = $"€ {price}";
             }
         }

@@ -32,21 +32,18 @@ namespace Tussentijds_Project
                 var collection = ctx.OrderDetails.Join(ctx.Products,
                     od => od.Product.ProductId,
                     p => p.ProductId,
-                    (sc, p) => new { sc, p })
-                    .GroupBy(c => c.sc.Order.OrderId);
+                    (od, p) => new { od, p })
+                    .GroupBy(c => c.od.Order.OrderId);
 
                 dgOrders.ItemsSource = ctx.Orders.Join(collection,
                     o => o.OrderId,
                     c => c.Key,
-                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.sc.Quantity), TotalP = c.Sum(s => s.sc.Product.UnitPrice * s.sc.Quantity) })
+                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity) })
                     .ToList();                    
 
                 cbOrders.ItemsSource = ctx.Orders.ToList();               
                 cbCustomersAdd.ItemsSource = ctx.Customers.ToList();
-                cbProductsAdd.ItemsSource = ctx.Products.ToList();
-                //cbOrdersEdit.ItemsSource = ctx.Orders.ToList();
-                //cbCustomersEdit.ItemsSource = ctx.Customers.ToList();
-                //cbProductsEdit.ItemsSource = ctx.Products.ToList();
+                cbProductsAdd.ItemsSource = ctx.Products.ToList();                
             }
         }
 
@@ -149,56 +146,8 @@ namespace Tussentijds_Project
             cbProductsAdd.SelectedItem = null;
             txtAantalAdd.Clear();
             lbProductsAdd.Items.Clear();
-        }
-
-        private void cbOrdersEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //Order selected = cbOrdersEdit.SelectedItem as Order;
-
-            //if (cbOrdersEdit.SelectedItem != null)
-            //{
-            //    using (var ctx = new OrderManagerContext())
-            //    {
-            //        cbCustomersEdit.SelectedItem = selected.Customer;
-            //        dpOrderEdit.SelectedDate = selected.OrderDate;                    
-            //        lbProductsEdit.ItemsSource = ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId).Select(od => new { od.Product, od.Quantity }).ToList(); 
-            //    }
-
-            //}
-        }
-
-        private void lbProductsEdit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            
-            //Tuple<Product, int> selected = lbProductsEdit.SelectedItem as Tuple<Product, int>;
-
-            //if (selected != null)
-            //{
-            //    cbProductsEdit.SelectedItem = selected.Item1;
-            //    txtAantalEdit.Text = selected.Item2.ToString();
-            //}
-
-        }
-
-        private void Button_Click_Edit(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_Save(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_CancelEdit(object sender, RoutedEventArgs e)
-        {
-            cbOrdersEdit.SelectedItem = null;
-            cbCustomersEdit.SelectedItem = null;
-            dpOrderEdit.SelectedDate = null;
-            cbProductsEdit.SelectedItem = null;
-            txtAantalEdit.Clear();
-            lbProductsEdit.ItemsSource = null;
-        }
-
+        }      
+                
         private void Button_Click_Delete(object sender, RoutedEventArgs e)
         {
             if (cbOrders.SelectedItem != null)
