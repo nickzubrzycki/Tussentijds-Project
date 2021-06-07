@@ -1,4 +1,5 @@
 ﻿using System;
+using PdfSharp;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -190,8 +191,7 @@ namespace Tussentijds_Project
         {
             if (cbOrders.SelectedItem != null)
             {                
-                Invoice invoice = new Invoice();                
-                invoice.Show();
+                
 
                 
             }

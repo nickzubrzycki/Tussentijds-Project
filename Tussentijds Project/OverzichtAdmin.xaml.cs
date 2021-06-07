@@ -27,19 +27,19 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                var collection = ctx.Products.Join(ctx.Suppliers,
+                var collectionPS = ctx.Products.Join(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
                     (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
 
-                dgMagazijn.ItemsSource = collection;
+                dgMagazijn.ItemsSource = collectionPS;
 
                 cbSuppliers.ItemsSource = ctx.Suppliers.ToList();
 
                 int stock = 0;
                 double price = 0;
 
-                foreach (var item in collection)
+                foreach (var item in collectionPS)
                 {
                     stock += item.Stock;
                     price += item.Stock * item.UnitPrice;
@@ -47,6 +47,31 @@ namespace Tussentijds_Project
 
                 tbAantal.Text = stock.ToString();
                 tbPrijs.Text = $"€ {price}";
+
+                var collectionOdP = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (od, p) => new { od, p });
+
+                int sales = 0;
+                double revenue = 0;
+
+                foreach (var item in collectionOdP)
+                {
+                    sales += item.od.Quantity;
+                    revenue += item.p.UnitPrice * item.od.Quantity;
+                }
+
+                tbAfzet.Text = $"{sales} stuks";
+                tbOmzet.Text = $"€ {revenue}";
+
+
+                var coll = collectionOdP.GroupBy(c => c.od.Order.Customer.CustomerId);
+
+                dgKlanten.ItemsSource = ctx.Customers.Join(coll,
+                    cu => cu.CustomerId,
+                    c => c.Key,
+                    (cu, c) => new { Name = cu.Name, Address = cu.Address, Sales = c.Sum(s => s.od.Quantity), Revenue = c.Sum(s => s.p.UnitPrice * s.od.Quantity) }).ToList();
             }
         }
 
@@ -263,6 +288,48 @@ namespace Tussentijds_Project
             txtMinStock.Text = null;
             txtMaxStock.Text = null;
             cbSuppliers.SelectedItem = null;
+        }
+
+        private void btnCustomers_Click(object sender, RoutedEventArgs e)
+        {
+            dgVerkocht.Visibility = Visibility.Hidden;
+            dgKlanten.Visibility = Visibility.Visible;
+            btnProducts.IsEnabled = true;
+            btnCustomers.IsEnabled = false;
+
+            using (var ctx = new OrderManagerContext())
+            {
+
+                var collection = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (od, p) => new { od, p })
+                    .GroupBy(c => c.od.Order.Customer.CustomerId); ;
+
+                dgKlanten.ItemsSource = ctx.Customers.Join(collection,
+                    cu => cu.CustomerId,
+                    c => c.Key,
+                    (cu, c) => new { Name = cu.Name, Address = cu.Address, Sales = c.Sum(s => s.od.Quantity), Revenue = c.Sum(s => s.p.UnitPrice * s.od.Quantity) }).ToList();
+            }
+        }
+
+        private void btnProducts_Click(object sender, RoutedEventArgs e)
+        {
+            dgKlanten.Visibility = Visibility.Hidden;
+            dgVerkocht.Visibility = Visibility.Visible;
+            btnCustomers.IsEnabled = true;
+            btnProducts.IsEnabled = false;
+
+            using (var ctx = new OrderManagerContext())
+            {
+
+                dgVerkocht.ItemsSource = ctx.OrderDetails.GroupBy(od => od.Product.ProductId).Join(ctx.Products,
+                    od => od.Key,
+                    p => p.ProductId,
+                    (od, p) => new { Name = p.Name, UnitPrice = p.UnitPrice, Sales = od.Sum(s => s.Quantity), Revenue = od.Sum(s => s.Product.UnitPrice * s.Quantity) }).ToList();
+
+
+            }
         }
     }
 }

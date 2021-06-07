@@ -62,17 +62,17 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="# Verkocht" Width="100" CanUserSort="True" SortMemberPath="Stock">
+                            <DataGridTemplateColumn Header="Afzet" Width="100" CanUserSort="True" SortMemberPath="Sales">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding Stock}"></Label>
+                                        <Label Content="{Binding Sales}"></Label>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Header="Leverancier" Width="100" CanUserSort="True" SortMemberPath="Supplier">
+                            <DataGridTemplateColumn Header="Omzet" Width="100" CanUserSort="True" SortMemberPath="Revenue">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Label Content="{Binding Supplier}"></Label>
+                                        <Label Content="{Binding Revenue }"></Label>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
