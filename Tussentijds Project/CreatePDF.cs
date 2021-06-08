@@ -35,27 +35,27 @@ namespace Tussentijds_Project
                 {
                     graph.DrawString($"{details[i].Product.Name}", font, XBrushes.Black, new XRect(10, 420 + (i * 20), 100, 0));
                     graph.DrawString($"{details[i].Quantity}", font, XBrushes.Black, new XRect(340, 420 + (i * 20), 100, 0));
-                    graph.DrawString($"€ {details[i].Product.UnitPrice * details[i].Quantity}", font, XBrushes.Black, new XRect(440, 420 + (i * 20), 100, 0));
+                    graph.DrawString($"€ {string.Format("{0:0.00}", details[i].Product.UnitPrice * details[i].Quantity)}", font, XBrushes.Black, new XRect(440, 420 + (i * 20), 100, 0));
                     graph.DrawLine(pen, 10, 425 + (i * 20), 580, 425 + (i * 20));
                 }
             }
 
-            graph.DrawImage(logo, new XRect(10, 0, 150, 150));
-            graph.DrawString("NZ Shipping", font, XBrushes.Black, new XRect(page.Width - 140, 40, 100, 0));
-            graph.DrawString("Kazerneweg 71", font, XBrushes.Black, new XRect(page.Width - 140, 50, 100, 0));
-            graph.DrawString("2950 Kapellen", font, XBrushes.Black, new XRect(page.Width - 140, 60, 100, 0));
+            graph.DrawImage(logo, new XRect(5, 0, 100, 100));
+            graph.DrawString("NZ Shipping BVBA", font, XBrushes.Black, new XRect(10, 105, 100, 0));
+            graph.DrawString("Kazerneweg 71", font, XBrushes.Black, new XRect(10, 115, 100, 0));
+            graph.DrawString("2950 Kapellen", font, XBrushes.Black, new XRect(10, 125, 100, 0));
 
             graph.DrawString($"Klant: {order.Customer.Name}", font, XBrushes.Black, new XRect(10, 200, 100, 0));
-            graph.DrawString($"Bestellingsnr.: {order.OrderId}", font, XBrushes.Black, new XRect(10, 220, 100, 0));
+            graph.DrawString($"ID Bestelling: {order.OrderId}", font, XBrushes.Black, new XRect(10, 220, 100, 0));
             graph.DrawString($"Besteldatum: {order.OrderDate.ToString("dd/MM/yyyy")}", font, XBrushes.Black, new XRect(10, 240, 100, 0));
 
             graph.DrawString("Naam Product", font, XBrushes.Black, new XRect(10, 390, 100, 0));
             graph.DrawString("Aantal", font, XBrushes.Black, new XRect(340, 390, 100, 0));
             graph.DrawString("Prijs", font, XBrushes.Black, new XRect(440, 390, 100, 0));                       
 
-            graph.DrawString($"Totale Prijs (excl. BTW): € {TotalePrijs(details)}", font, XBrushes.Black, new XRect(10, 420 + (details.Count * 20), 100, 0));
+            graph.DrawString($"Totale Prijs (excl. BTW): € {string.Format("{0:0.00}", TotalePrijs(details))}", font, XBrushes.Black, new XRect(10, 420 + (details.Count * 20), 100, 0));
             graph.DrawString("BTW: 21%", font, XBrushes.Black, new XRect(10, 420 + (details.Count * 20) + 20, 100, 0));
-            graph.DrawString($"TOTALE PRIJS (incl. BTW): € {TotalePrijsBtw(details)}", font, XBrushes.Black, new XRect(10, 420 + (details.Count * 20) + 40, 100, 0));
+            graph.DrawString($"TOTALE PRIJS (incl. BTW): € {string.Format("{0:0.00}", TotalePrijsBtw(details))}", font, XBrushes.Black, new XRect(10, 420 + (details.Count * 20) + 40, 100, 0));
 
             string filename = "C:/Users/nickz/source/repos/Tussentijds Project/Tussentijds Project/docs/factuur.pdf";
             doc.Save(filename);

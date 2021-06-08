@@ -46,7 +46,7 @@ namespace Tussentijds_Project
                 }
 
                 tbAantal.Text = $"{stock} stuks";
-                tbPrijs.Text = $"€ {price}";
+                tbPrijs.Text = $"€ {string.Format("{0:0.00}", price)}";
             }
         }
         private void Button_Click_Back(object sender, RoutedEventArgs e)

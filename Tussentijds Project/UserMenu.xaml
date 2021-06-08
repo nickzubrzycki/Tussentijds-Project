@@ -6,17 +6,26 @@
         xmlns:local="clr-namespace:Tussentijds_Project"
         mc:Ignorable="d"
         Title="Hoofdmenu" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Background="AliceBlue">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="17*"/>
-            <ColumnDefinition Width="379*"/>
-        </Grid.ColumnDefinitions>
-        <Label x:Name="lblUser" FontStyle="Italic" VerticalContentAlignment="Top" Grid.ColumnSpan="2"></Label>
-        <StackPanel Margin="16,110,50,109" VerticalAlignment="Center" Grid.Column="1">
-            <Button Width="150" Margin="10" Click="Button_Click_Databeheer">Databeheer</Button>
-            <Button Width="150" Margin="10" Click="Button_Click_Overzicht">Overzicht</Button>
-            <Button Width="150" Margin="10" Click="Button_Click_Bestelling">Bestelling</Button>
-            <Button Width="150" Margin="30" Click="Button_Click_Back">Uitloggen</Button>
-        </StackPanel>
+    <Grid Background="AliceBlue">        
+        <Label x:Name="lblUser" FontStyle="Italic" VerticalContentAlignment="Top"/>            
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>            
+            <Image Grid.Column="0" Source="images/logo.png" Opacity="0.4"/>
+            <StackPanel Grid.Column="1" Margin="50,110,50,109" VerticalAlignment="Center">
+                <Button Width="150" Margin="10" Click="Button_Click_Databeheer">Databeheer</Button>
+                <Button Width="150" Margin="10" Click="Button_Click_Overzicht">Overzicht</Button>
+                <Button x:Name="btnOrder" Width="150" Margin="10" Click="Button_Click_Bestelling">Bestelling</Button>
+                <Button Width="150" Margin="30" Click="Button_Click_Back">Uitloggen</Button>
+            </StackPanel>
+            <Image Grid.Column="2" Source="images/logo.png" Opacity="0.4"/>
+        </Grid>
+            
+            
+       
+       
     </Grid>
 </Window>

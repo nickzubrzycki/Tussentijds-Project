@@ -24,6 +24,9 @@ namespace Tussentijds_Project
             InitializeComponent();
 
             lblUser.Content = $"{ActiveUser.FirstName} {ActiveUser.LastName} ({ActiveUser.Role})";
+
+            if (ActiveUser.Role == "Magazijnier")
+                btnOrder.IsEnabled = false;
             
         }        
 

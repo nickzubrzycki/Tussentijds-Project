@@ -46,7 +46,7 @@ namespace Tussentijds_Project
                 }
 
                 tbAantal.Text = stock.ToString();
-                tbPrijs.Text = $"€ {price}";
+                tbPrijs.Text = $"€ {string.Format("{0:0.00}", price)}";
 
                 var collectionOdP = ctx.OrderDetails.Join(ctx.Products,
                     od => od.Product.ProductId,
@@ -63,7 +63,7 @@ namespace Tussentijds_Project
                 }
 
                 tbAfzet.Text = $"{sales} stuks";
-                tbOmzet.Text = $"€ {revenue}";
+                tbOmzet.Text = $"€ {string.Format("{0:0.00}", revenue)}";
 
 
                 var coll = collectionOdP.GroupBy(c => c.od.Order.Customer.CustomerId);

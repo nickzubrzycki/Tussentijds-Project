@@ -42,7 +42,7 @@ namespace Tussentijds_Project
                 }
 
                 tbAfzet.Text = $"{sales} stuks";
-                tbOmzet.Text = $"€ {revenue}";
+                tbOmzet.Text = $"€ {string.Format("{0:0.00}", revenue)}";
 
 
                 var coll = collection.GroupBy(c => c.od.Order.Customer.CustomerId);

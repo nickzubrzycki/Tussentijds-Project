@@ -14,7 +14,18 @@
             </DockPanel>
             <TabControl>
                 <TabItem Header="Overzicht">
-                    <DockPanel>                        
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Bottom">
+                            <TextBlock TextDecorations="Underline" Margin="5">Filter op datum</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>van:</Label>
+                                <DatePicker x:Name="dpVan" VerticalContentAlignment="Center"></DatePicker>
+                                <Label>tot:</Label>
+                                <DatePicker x:Name="dpTot" VerticalContentAlignment="Center"></DatePicker>
+                                <Button Width="50" VerticalAlignment="Center" Margin="10,0" Click="Button_Click_Filter">OK</Button>
+                                <Button Width="50" VerticalAlignment="Center" Margin="10,0" Click="Button_Click_Reset">Reset</Button>
+                            </StackPanel>
+                        </StackPanel>
                         <DataGrid DockPanel.Dock="Left" x:Name="dgOrders" Margin="5,10" Height="280" ItemsSource="{Binding}" IsReadOnly="true" AutoGenerateColumns="false" HorizontalAlignment="Left" CanUserSortColumns="True">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="ID" Width="35" CanUserSort="True" SortMemberPath="OrderId">
@@ -53,7 +64,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>                                
-                        </DataGrid>
+                        </DataGrid>                        
                         <StackPanel DockPanel.Dock="Right">
                             <Label>Selecteer een order.</Label>
                             <ComboBox x:Name="cbOrders" SelectedValue="{Binding myVar}" Width="100" Height="30" HorizontalAlignment="Left" Margin="5,10">
@@ -100,7 +111,7 @@
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        </StackPanel>
+                        </StackPanel>                        
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Nieuwe bestelling">
@@ -162,7 +173,7 @@
                             </GroupBox>                            
                         </DockPanel>                        
                     </DockPanel>                  
-                </TabItem>                             
+                </TabItem>                
             </TabControl>
         </StackPanel>
     </Grid>

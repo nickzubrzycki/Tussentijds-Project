@@ -39,7 +39,7 @@ namespace Tussentijds_Project
                 dgOrders.ItemsSource = ctx.Orders.Join(collection,
                     o => o.OrderId,
                     c => c.Key,
-                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity) })
+                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity)})
                     .ToList();                    
 
                 cbOrders.ItemsSource = ctx.Orders.ToList();               
@@ -199,6 +199,56 @@ namespace Tussentijds_Project
             }
             else
                 MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Button_Click_Filter(object sender, RoutedEventArgs e)
+        {
+            if (dpVan.SelectedDate != null && dpTot.SelectedDate != null)
+            {
+                using (var ctx = new OrderManagerContext())
+                {
+                    var collection = ctx.OrderDetails.Join(ctx.Products,
+                       od => od.Product.ProductId,
+                       p => p.ProductId,
+                       (od, p) => new { od, p })
+                       .GroupBy(c => c.od.Order.OrderId);
+
+                    dgOrders.ItemsSource = ctx.Orders.Join(collection,
+                        o => o.OrderId,
+                        c => c.Key,
+                        (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity) })
+                        .Where(w => w.OrderDate >= dpVan.SelectedDate && w.OrderDate <= dpTot.SelectedDate)
+                        .ToList();
+
+                    cbOrders.ItemsSource = ctx.Orders.Where(w => w.OrderDate >= dpVan.SelectedDate && w.OrderDate <= dpTot.SelectedDate).ToList();
+                }
+            }
+            else
+                MessageBox.Show("Gelieve een begin- en einddatum in te vullen.", "", MessageBoxButton.OK, MessageBoxImage.Error);        
+                      
+        }
+
+        private void Button_Click_Reset(object sender, RoutedEventArgs e)
+        {
+            using (var ctx = new OrderManagerContext())
+            {
+                var collection = ctx.OrderDetails.Join(ctx.Products,
+                    od => od.Product.ProductId,
+                    p => p.ProductId,
+                    (od, p) => new { od, p })
+                    .GroupBy(c => c.od.Order.OrderId);
+
+                dgOrders.ItemsSource = ctx.Orders.Join(collection,
+                    o => o.OrderId,
+                    c => c.Key,
+                    (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity) })
+                    .ToList();
+
+                cbOrders.ItemsSource = ctx.Orders.ToList();
+            }
+            dpVan.SelectedDate = null;
+            dpTot.SelectedDate = null;
+            
         }
     }
 }

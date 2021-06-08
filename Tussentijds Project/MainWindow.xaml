@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="AliceBlue">
+        <Image Source="images/logo.png" Opacity="0.4"/>
         <StackPanel Margin="100" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Label Width="70">Username:</Label>
