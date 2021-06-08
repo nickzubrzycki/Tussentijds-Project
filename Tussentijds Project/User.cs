@@ -75,7 +75,7 @@ namespace Tussentijds_Project
     {
         [Key]
         public int OrderId { get; set; }        
-        public Customer Customer { get; set; }        
+        public virtual Customer Customer { get; set; }        
         public DateTime OrderDate { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; }
     }
@@ -85,7 +85,7 @@ namespace Tussentijds_Project
         [Key]
         public int OrderDetailId { get; set; }        
         public Order Order { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         public int Quantity { get; set; }        
     }
     

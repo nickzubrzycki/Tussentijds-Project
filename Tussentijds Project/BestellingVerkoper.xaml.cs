@@ -189,11 +189,13 @@ namespace Tussentijds_Project
 
         private void Button_Click_Invoice(object sender, RoutedEventArgs e)
         {
-            if (cbOrders.SelectedItem != null)
-            {                
-                
+            Order selected = cbOrders.SelectedItem as Order;
 
-                
+            if (cbOrders.SelectedItem != null)
+            {
+                int orderId = selected.OrderId;
+                CreatePDF pdf = new CreatePDF();
+                pdf.NewPDF(orderId);                
             }
             else
                 MessageBox.Show("Gelieve eerst een bestelling te selecteren.", "", MessageBoxButton.OK, MessageBoxImage.Error);
