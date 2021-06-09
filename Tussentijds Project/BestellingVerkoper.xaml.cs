@@ -156,7 +156,7 @@ namespace Tussentijds_Project
                 Order selected = cbOrders.SelectedItem as Order;
 
                 using (var ctx = new OrderManagerContext())
-                {
+                {                    
                     ctx.Orders.Remove(ctx.Orders.FirstOrDefault(o => o.OrderId == selected.OrderId));
                     ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId));
 

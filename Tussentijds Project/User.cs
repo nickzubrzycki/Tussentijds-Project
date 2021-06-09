@@ -21,7 +21,7 @@ namespace Tussentijds_Project
         public string Username { get; set; }
         [MaxLength(50)]
         public string Password { get; set; }
-        public Role Role { get; set; }
+        public virtual Role Role { get; set; }
         public User(string firstName, string lastName, string username, string password, Role role)
         {
             FirstName = firstName;
@@ -84,7 +84,7 @@ namespace Tussentijds_Project
     {
         [Key]
         public int OrderDetailId { get; set; }        
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
         public int Quantity { get; set; }        
     }
@@ -97,7 +97,7 @@ namespace Tussentijds_Project
         public string Name { get; set; }  
         public double UnitPrice { get; set; }
         public int Stock { get; set; }
-        public Supplier Supplier { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public override string ToString()
         {
             return Name;

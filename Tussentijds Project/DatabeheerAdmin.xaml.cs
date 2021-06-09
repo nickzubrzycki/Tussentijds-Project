@@ -47,23 +47,23 @@ namespace Tussentijds_Project
                     (u, r) => new { FirstName = u.FirstName, LastName = u.LastName, Username = u.Username, Password = u.Password, Role = r.Name }).ToList();
                 cbUsersDelete.ItemsSource = ctx.Users.ToList();
 
-                dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 cbSuppliersAdd.ItemsSource = ctx.Suppliers.ToList();
 
-                dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 cbProductsEdit.ItemsSource = ctx.Products.ToList();
                 cbSuppliersProductEdit.ItemsSource = ctx.Suppliers.ToList();
 
-                dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 cbProductsDelete.ItemsSource = ctx.Products.ToList();
 
                 dgSuppliersAdd.ItemsSource = ctx.Suppliers.ToList();
@@ -461,7 +461,7 @@ namespace Tussentijds_Project
                 Supplier selected = cbSuppliersDelete.SelectedItem as Supplier;
 
                 using (var ctx = new OrderManagerContext())
-                {
+                {                    
                     ctx.Suppliers.Remove(ctx.Suppliers.FirstOrDefault(s => s.SupplierId == selected.SupplierId));
                     ctx.SaveChanges();
 
@@ -583,7 +583,15 @@ namespace Tussentijds_Project
 
                 using (var ctx = new OrderManagerContext())
                 {
-                    ctx.Customers.Remove(ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId));
+                    var collection = ctx.OrderDetails.Select(od => od).Where(od => od.Order.Customer.CustomerId == selected.CustomerId);
+                    foreach (OrderDetail item in collection)
+                    {
+                        ctx.Products.FirstOrDefault(p => p.ProductId == item.Product.ProductId).Stock = item.Product.Stock + item.Quantity;
+                    }
+                    ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Order.Customer.CustomerId == selected.CustomerId));
+                    ctx.Orders.RemoveRange(ctx.Orders.Where(o => o.Customer.CustomerId == selected.CustomerId));
+                    ctx.Customers.Remove(ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId));                    
+
                     ctx.SaveChanges();
 
                     dgCustomersAdd.ItemsSource = null;
