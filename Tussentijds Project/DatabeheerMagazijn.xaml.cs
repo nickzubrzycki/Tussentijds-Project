@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,23 +28,23 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 cbSuppliersAdd.ItemsSource = ctx.Suppliers.ToList();
 
-                dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
-                cbProductsEdit.ItemsSource = ctx.Products.ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
+                cbProductsEdit.ItemsSource = ctx.Products.Include(p => p.Supplier).ToList();
                 cbSuppliersProductEdit.ItemsSource = ctx.Suppliers.ToList();
 
-                dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 cbProductsDelete.ItemsSource = ctx.Products.ToList();
 
                 dgSuppliersAdd.ItemsSource = ctx.Suppliers.ToList();
@@ -68,23 +69,23 @@ namespace Tussentijds_Project
                     ctx.SaveChanges();
 
                     dgProductsAdd.ItemsSource = null;
-                    dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                     dgProductsEdit.ItemsSource = null;
-                    dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsEdit.ItemsSource = ctx.Products.ToList();
 
                     dgProductsDelete.ItemsSource = null;
-                    dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsDelete.ItemsSource = ctx.Products.ToList();
                 }
                 MessageBox.Show("Product werd toegevoegd.", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -113,23 +114,23 @@ namespace Tussentijds_Project
                     ctx.SaveChanges();
 
                     dgProductsAdd.ItemsSource = null;
-                    dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                     dgProductsEdit.ItemsSource = null;
-                    dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsEdit.ItemsSource = ctx.Products.ToList();
 
                     dgProductsDelete.ItemsSource = null;
-                    dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsDelete.ItemsSource = ctx.Products.ToList();
                 }
                 MessageBox.Show("De wijzigingen werden opgeslagen.", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -163,27 +164,28 @@ namespace Tussentijds_Project
 
                 using (var ctx = new OrderManagerContext())
                 {
+                    ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Product.ProductId == selected.ProductId));
                     ctx.Products.Remove(ctx.Products.FirstOrDefault(p => p.ProductId == selected.ProductId));
                     ctx.SaveChanges();
 
                     dgProductsAdd.ItemsSource = null;
-                    dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                     dgProductsEdit.ItemsSource = null;
-                    dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsEdit.ItemsSource = ctx.Products.ToList();
 
                     dgProductsDelete.ItemsSource = null;
-                    dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbProductsDelete.ItemsSource = ctx.Products.ToList();
                 }
                 MessageBox.Show("Het product werd verwijderd.", "", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -247,23 +249,23 @@ namespace Tussentijds_Project
                     cbSuppliersDelete.ItemsSource = ctx.Suppliers.ToList();
 
                     dgProductsAdd.ItemsSource = null;
-                    dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                     dgProductsEdit.ItemsSource = null;
-                    dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbSuppliersProductEdit.ItemsSource = ctx.Suppliers.ToList();
 
                     dgProductsDelete.ItemsSource = null;
-                    dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                 }
                 MessageBox.Show("De wijzigingen werden opgeslagen.", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 txtNaamSupplierEdit.Clear();
@@ -308,23 +310,23 @@ namespace Tussentijds_Project
                     cbSuppliersDelete.ItemsSource = ctx.Suppliers.ToList();
 
                     dgProductsAdd.ItemsSource = null;
-                    dgProductsAdd.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsAdd.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                     dgProductsEdit.ItemsSource = null;
-                    dgProductsEdit.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsEdit.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
                     cbSuppliersProductEdit.ItemsSource = ctx.Suppliers.ToList();
 
                     dgProductsDelete.ItemsSource = null;
-                    dgProductsDelete.ItemsSource = ctx.Products.Join(ctx.Suppliers,
+                    dgProductsDelete.ItemsSource = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                 }
                 MessageBox.Show("De leverancier werd verwijderd.", "", MessageBoxButton.OK, MessageBoxImage.Information);

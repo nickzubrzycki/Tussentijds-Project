@@ -17,9 +17,9 @@ namespace Tussentijds_Project
         public string FirstName { get; set; }
         [MaxLength(50)]
         public string LastName { get; set; }
-        [MaxLength(50)]
+        [MaxLength(15)]
         public string Username { get; set; }
-        [MaxLength(50)]
+        [MaxLength(15)]
         public string Password { get; set; }
         public virtual Role Role { get; set; }
         public User(string firstName, string lastName, string username, string password, Role role)

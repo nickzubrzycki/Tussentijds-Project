@@ -117,7 +117,18 @@ namespace Tussentijds_Project
 
                 using (var ctx = new OrderManagerContext())
                 {
+                    ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Order.Customer.CustomerId == selected.CustomerId));
+                    ctx.Orders.RemoveRange(ctx.Orders.Where(o => o.Customer.CustomerId == selected.CustomerId));
                     ctx.Customers.Remove(ctx.Customers.FirstOrDefault(c => c.CustomerId == selected.CustomerId));
+
+                    var collection = ctx.OrderDetails.Join(ctx.Products, od => od.Product.ProductId, p => p.ProductId, (od, p) => new { od, p })
+                        .Join(ctx.Customers, sc => sc.od.Order.Customer.CustomerId, cu => cu.CustomerId, (sc, cu) => new { sc, cu })
+                        .Where(c => c.cu.CustomerId == selected.CustomerId).ToList();
+
+                    foreach (var item in collection)
+                    {
+                        ctx.Products.FirstOrDefault(p => p.ProductId == item.sc.p.ProductId).Stock = item.sc.p.Stock + item.sc.od.Quantity;
+                    }
                     ctx.SaveChanges();
 
                     dgCustomersAdd.ItemsSource = null;

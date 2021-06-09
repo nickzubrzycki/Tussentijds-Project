@@ -27,10 +27,10 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                var collection = ctx.Products.Join(ctx.Suppliers,
+                var collection = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                 dgMagazijn.ItemsSource = collection;
 
@@ -62,10 +62,10 @@ namespace Tussentijds_Project
             {
                 if (!string.IsNullOrEmpty(txtFilterNaam.Text))
                 {
-                    var filter = ctx.Products.Join(ctx.Suppliers,
+                    var filter = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name })
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name })
                     .Where(f => f.Name.Contains(txtFilterNaam.Text)).ToList();
 
                     if (filter.Count != 0)
@@ -111,10 +111,10 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                var filter = ctx.Products.Join(ctx.Suppliers,
+                var filter = ctx.Products.GroupJoin(ctx.Suppliers,
                      p => p.Supplier.SupplierId,
                      s => s.SupplierId,
-                     (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name })
+                     (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name })
                      .Where(f => f.UnitPrice >= MinPrijs && f.UnitPrice <= MaxPrijs).ToList();
 
                 if (filter.Count != 0)
@@ -156,10 +156,10 @@ namespace Tussentijds_Project
 
             using (var ctx = new OrderManagerContext())
             {
-                var filter = ctx.Products.Join(ctx.Suppliers,
+                var filter = ctx.Products.GroupJoin(ctx.Suppliers,
                      p => p.Supplier.SupplierId,
                      s => s.SupplierId,
-                     (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name })
+                     (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name })
                      .Where(f => f.Stock >= MinStock && f.Stock <= MaxStock).ToList();
 
                 if (filter.Count != 0)
@@ -197,10 +197,10 @@ namespace Tussentijds_Project
             {
                 if (cbSuppliers.SelectedItem != null)
                 {
-                    var filter = ctx.Products.Join(ctx.Suppliers,
+                    var filter = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name })
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name })
                     .Where(f => f.Supplier == selected.Name).ToList();
 
                     if (filter.Count != 0)
@@ -237,10 +237,10 @@ namespace Tussentijds_Project
         {
             using (var ctx = new OrderManagerContext())
             {
-                var collection = ctx.Products.Join(ctx.Suppliers,
+                var collection = ctx.Products.GroupJoin(ctx.Suppliers,
                     p => p.Supplier.SupplierId,
                     s => s.SupplierId,
-                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = s.Name }).ToList();
+                    (p, s) => new { Name = p.Name, UnitPrice = p.UnitPrice, Stock = p.Stock, Supplier = p.Supplier.Name }).ToList();
 
                 dgMagazijn.ItemsSource = collection;
 

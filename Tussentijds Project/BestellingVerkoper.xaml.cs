@@ -2,6 +2,7 @@
 using PdfSharp;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,7 +43,7 @@ namespace Tussentijds_Project
                     (o, c) => new { OrderId = o.OrderId, Name = o.Customer.Name, OrderDate = o.OrderDate, TotalQ = c.Sum(s => s.od.Quantity), TotalP = c.Sum(s => s.od.Product.UnitPrice * s.od.Quantity)})
                     .ToList();                    
 
-                cbOrders.ItemsSource = ctx.Orders.ToList();               
+                cbOrders.ItemsSource = ctx.Orders.Include(o => o.OrderDetails).ToList();               
                 cbCustomersAdd.ItemsSource = ctx.Customers.ToList();
                 cbProductsAdd.ItemsSource = ctx.Products.ToList();                
             }
@@ -156,7 +157,7 @@ namespace Tussentijds_Project
                 Order selected = cbOrders.SelectedItem as Order;
 
                 using (var ctx = new OrderManagerContext())
-                {                    
+                {                   
                     ctx.Orders.Remove(ctx.Orders.FirstOrDefault(o => o.OrderId == selected.OrderId));
                     ctx.OrderDetails.RemoveRange(ctx.OrderDetails.Where(od => od.Order.OrderId == selected.OrderId));
 
@@ -164,7 +165,6 @@ namespace Tussentijds_Project
                     {
                         ctx.Products.FirstOrDefault(p => p.ProductId == item.Product.ProductId).Stock = item.Product.Stock + item.Quantity;
                     }
-
                     ctx.SaveChanges();
 
                     var collection = ctx.OrderDetails.Join(ctx.Products,
