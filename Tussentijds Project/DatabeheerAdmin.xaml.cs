@@ -385,6 +385,7 @@ namespace Tussentijds_Project
                     cbSuppliersDelete.ItemsSource = ctx.Suppliers.ToList();
 
                     cbSuppliersSupplierEdit.ItemsSource = ctx.Suppliers.ToList();
+                    cbSuppliersProductEdit.ItemsSource = ctx.Suppliers.ToList();
                 }
                 MessageBox.Show("Leverancier werd toegevoegd.", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 txtNaamSupplierAdd.Clear();
